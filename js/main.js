@@ -1,5 +1,35 @@
 // mediom — shared front-end behavior
 
+(() => {
+  /* intro loader — only plays in full on the first page of a visit;
+     later page navigations within the same session skip straight past it
+     so browsing the site doesn't feel like reloading an app each click */
+  const loader = document.querySelector('.site-loader');
+  if (!loader) return;
+  const alreadyVisited = sessionStorage.getItem('mediom-visited');
+  if (alreadyVisited) {
+    loader.classList.add('is-skipped');
+    return;
+  }
+  sessionStorage.setItem('mediom-visited', '1');
+  const MIN_DISPLAY_MS = 700;
+  const shown = Date.now();
+  const hide = () => {
+    const elapsed = Date.now() - shown;
+    const wait = Math.max(0, MIN_DISPLAY_MS - elapsed);
+    setTimeout(() => {
+      loader.classList.add('is-hidden');
+      setTimeout(() => loader.classList.add('is-skipped'), 550);
+    }, wait);
+  };
+  if (document.readyState === 'complete') {
+    hide();
+  } else {
+    window.addEventListener('load', hide);
+    setTimeout(hide, 2200); // safety fallback if load never fires
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   /* mobile nav toggle */
   const toggle = document.querySelector('.nav-toggle');

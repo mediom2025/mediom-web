@@ -23,11 +23,16 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div class="site-loader" aria-hidden="true">
+  <div class="loader-cat"><img src="/images/cats/cat-walking.png" alt=""></div>
+  <div class="loader-word"><img src="/images/logo-wordmark.png" alt="mediom"></div>
+  <div class="loader-track"></div>
+</div>
 <a href="#main" class="skip-link">本文へスキップ</a>
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="logo">mediom</a>
+    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt=""><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom"></a>
     <nav class="main-nav" aria-label="グローバルナビゲーション">
       <ul>
         <li><a href="/about">会社概要</a></li>
@@ -147,6 +152,7 @@
 </main>
 
 <footer class="site-footer">
+  <div class="footer-cat" aria-hidden="true"><img src="/images/cats/cat-sleeping.png" alt=""></div>
   <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;width:100%">
     <nav aria-label="フッターナビゲーション">
       <a href="/about">会社概要</a>

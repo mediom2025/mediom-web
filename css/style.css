@@ -2,7 +2,7 @@
    mediom — base styles
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Shippori+Mincho:wght@400;500;600;700&display=swap');
 
 :root{
   --paper:#f0eee9;
@@ -20,7 +20,9 @@
   --red:#b04a3a;
   --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
   --sans:'Zen Kaku Gothic New','Noto Sans JP',system-ui,-apple-system,sans-serif;
+  --serif:'Shippori Mincho','Noto Serif JP',serif;
   --max:1120px;
+  --max-wide:1280px;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -81,9 +83,32 @@ a{color:inherit;text-decoration:none}
   justify-content:space-between;
 }
 .logo{
+  display:flex;
+  align-items:center;
+  gap:9px;
   font:600 18px/1 var(--mono);
   color:var(--green);
   letter-spacing:.01em;
+}
+.logo .logo-mark{
+  height:30px;
+  width:auto;
+  display:block;
+}
+.logo .logo-word{
+  height:15px;
+  width:auto;
+  display:block;
+}
+.footer-logo{
+  display:inline-flex;
+  align-items:center;
+  gap:2px;
+}
+.footer-logo img{
+  height:22px;
+  width:auto;
+  opacity:.75;
 }
 .main-nav{
   display:flex;
@@ -142,10 +167,10 @@ a{color:inherit;text-decoration:none}
   padding:10px 22px;
   border-radius:99px;
   white-space:nowrap;
-  transition:opacity .2s ease, transform .2s ease;
+  transition:opacity .25s ease, transform .25s ease, letter-spacing .25s ease;
   border:1px solid var(--green);
 }
-.btn-pill:hover{opacity:.85; transform:translateY(-1px)}
+.btn-pill:hover{opacity:.88; transform:translateY(-2px); letter-spacing:.02em}
 
 .btn-outline{
   display:inline-flex;
@@ -156,9 +181,9 @@ a{color:inherit;text-decoration:none}
   border:1px solid var(--ink-line);
   padding:9px 22px;
   border-radius:99px;
-  transition:border-color .2s ease, color .2s ease;
+  transition:border-color .25s ease, color .25s ease, transform .25s ease;
 }
-.btn-outline:hover{border-color:var(--green); color:var(--green)}
+.btn-outline:hover{border-color:var(--green); color:var(--green); transform:translateY(-2px)}
 
 .btn-pill-white{
   display:inline-flex;
@@ -169,9 +194,9 @@ a{color:inherit;text-decoration:none}
   border:1px solid rgba(255,255,255,.55);
   padding:10px 24px;
   border-radius:99px;
-  transition:background .2s ease;
+  transition:background .25s ease, transform .25s ease;
 }
-.btn-pill-white:hover{background:rgba(255,255,255,.12)}
+.btn-pill-white:hover{background:rgba(255,255,255,.12); transform:translateY(-2px)}
 
 .nav-toggle{
   display:none;
@@ -185,7 +210,7 @@ a{color:inherit;text-decoration:none}
 /* ---------- hero / FV ---------- */
 .hero{
   position:relative;
-  min-height:78vh;
+  min-height:92vh;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -196,24 +221,107 @@ a{color:inherit;text-decoration:none}
     linear-gradient(150deg,#eae7e0,#f4f2ec 55%,#e7e3da);
   border-bottom:1px solid var(--ink-line-soft);
 }
+.hero::before,
+.hero::after{
+  content:'';
+  position:absolute;
+  border:1px solid var(--green-line);
+  border-radius:50%;
+  opacity:.35;
+  pointer-events:none;
+}
+.hero::before{
+  width:640px;height:640px;
+  left:-220px;top:-260px;
+  animation:driftSlow 26s ease-in-out infinite;
+}
+.hero::after{
+  width:420px;height:420px;
+  right:-160px;bottom:-200px;
+  animation:driftSlow 22s ease-in-out infinite reverse;
+}
+@keyframes driftSlow{
+  0%,100%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(18px,-14px) rotate(6deg)}
+}
+.hero-lines{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+.hero-lines path{
+  fill:none;
+  stroke:var(--green);
+  stroke-width:1;
+  opacity:.28;
+  stroke-dasharray:1400;
+  stroke-dashoffset:1400;
+  animation:drawLine 2.6s ease forwards .3s;
+}
+.hero-lines path:nth-child(2){
+  opacity:.16;
+  animation-delay:.7s;
+}
+@keyframes drawLine{
+  to{stroke-dashoffset:0}
+}
+.hero-cat{
+  position:absolute;
+  left:-140px;
+  bottom:14%;
+  width:120px;
+  opacity:.9;
+  animation:catWalkAcross 10s linear infinite;
+}
+/* the outer element carries the slow left-to-right walk; the image inside
+   carries a fast little up/down + tilt cycle so the cat reads as taking
+   quick steps (テクテク) rather than gliding smoothly across the hero */
+.hero-cat img{
+  width:100%;height:auto;display:block;
+  animation:catTrot .4s ease-in-out infinite;
+  transform-origin:50% 100%;
+}
+@keyframes catWalkAcross{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(calc(100vw + 200px))}
+}
+@keyframes catTrot{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  25%{transform:translateY(-4px) rotate(-2deg)}
+  50%{transform:translateY(-1px) rotate(0deg)}
+  75%{transform:translateY(-4px) rotate(2deg)}
+}
 .hero-inner{
+  position:relative;
+  z-index:1;
   text-align:center;
   padding:60px 24px;
 }
+.hero-inner .eyebrow{
+  opacity:0;
+  animation:riseIn .9s ease forwards 0s;
+}
+.hero-inner .eyebrow + .hero-copy{
+  margin-top:22px;
+}
 .hero-copy{
   margin:0;
-  font-size:clamp(28px,5vw,46px);
-  font-weight:400;
-  line-height:1.55;
+  font-family:var(--serif);
+  font-size:clamp(32px,6vw,58px);
+  font-weight:500;
+  line-height:1.6;
+  letter-spacing:.02em;
   color:var(--ink);
   opacity:0;
   transform:translateY(14px);
   animation:riseIn .9s ease forwards .15s;
 }
 .hero-sub{
-  margin-top:14px;
+  margin-top:18px;
   font:500 11px/1 var(--mono);
-  letter-spacing:.14em;
+  letter-spacing:.18em;
   color:var(--ink-faint);
   opacity:0;
   animation:riseIn .9s ease forwards .45s;
@@ -275,17 +383,20 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- sections ---------- */
 .section{
-  padding:88px 0;
+  padding:120px 0;
   border-bottom:1px dashed var(--ink-line);
 }
 .section-head{
-  margin-bottom:36px;
+  margin-bottom:44px;
 }
 .section-title{
-  font-size:clamp(22px,3vw,30px);
-  line-height:1.5;
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(24px,3.4vw,34px);
+  line-height:1.6;
+  letter-spacing:.01em;
   color:var(--ink);
-  margin-top:12px;
+  margin-top:14px;
 }
 .section-lead{
   margin-top:14px;
@@ -454,7 +565,7 @@ a{color:inherit;text-decoration:none}
   font:500 11px var(--mono);
   color:rgba(0,0,0,.4);
 }
-.about-title{font-size:16px;color:var(--ink)}
+.about-title{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--ink)}
 .about-text{font-size:13px;line-height:1.9;color:var(--ink-soft);margin-top:10px}
 .about-link{
   display:inline-block;
@@ -617,7 +728,9 @@ a{color:inherit;text-decoration:none}
   text-align:center;
 }
 .cta-band .cta-text{
-  font-size:18px;
+  font-family:var(--serif);
+  font-size:22px;
+  font-weight:500;
   color:#fff;
 }
 .cta-band .btn-pill-white{margin-top:20px}
@@ -744,16 +857,36 @@ a{color:inherit;text-decoration:none}
 
 /* page header (for subpages) */
 .page-head{
-  padding:56px 0 40px;
+  position:relative;
+  overflow:hidden;
+  padding:88px 0 64px;
   border-bottom:1px dashed var(--ink-line);
 }
+.page-head::before{
+  content:'';
+  position:absolute;
+  top:-140px;
+  right:-120px;
+  width:420px;
+  height:420px;
+  border:1px solid var(--green-line);
+  border-radius:50%;
+  opacity:.3;
+  animation:driftSlow 24s ease-in-out infinite;
+  pointer-events:none;
+}
+.page-head .container{position:relative;z-index:1}
 .page-head .title{
-  font-size:clamp(24px,4vw,34px);
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(26px,4.4vw,40px);
+  line-height:1.6;
+  letter-spacing:.01em;
   color:var(--ink);
-  margin-top:12px;
+  margin-top:14px;
 }
 .page-head .lead{
-  margin-top:14px;
+  margin-top:16px;
   font-size:13.5px;
   line-height:1.9;
   color:var(--ink-soft);
@@ -825,4 +958,118 @@ a{color:inherit;text-decoration:none}
 @media(max-width:560px){
   .container{padding:0 20px}
   .works-grid.cols-4{grid-template-columns:1fr 1fr}
+}
+
+/* ==========================================================================
+   mascot & loader — mediom cat
+   ========================================================================== */
+
+/* ---------- intro loader ---------- */
+.site-loader{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  background:var(--paper);
+  transition:opacity .5s ease;
+}
+.site-loader .loader-cat{
+  width:96px;
+}
+.site-loader .loader-cat img{
+  width:100%;height:auto;display:block;
+  animation:catTrot .4s ease-in-out infinite;
+  transform-origin:50% 100%;
+}
+.site-loader .loader-word{
+  height:20px;
+}
+.site-loader .loader-word img{
+  height:100%;
+  width:auto;
+  display:block;
+}
+.site-loader .loader-track{
+  width:120px;
+  height:1px;
+  background:var(--ink-line);
+  overflow:hidden;
+}
+.site-loader .loader-track::after{
+  content:'';
+  display:block;
+  width:40%;
+  height:100%;
+  background:var(--green);
+  animation:loaderTrack 1.1s ease-in-out infinite;
+}
+@keyframes loaderTrack{
+  0%{transform:translateX(-120%)}
+  100%{transform:translateX(340%)}
+}
+.site-loader.is-hidden{
+  opacity:0;
+  pointer-events:none;
+}
+.site-loader.is-skipped{display:none}
+@media(prefers-reduced-motion:reduce){
+  .site-loader .loader-cat img,
+  .site-loader .loader-track::after,
+  .hero::before,.hero::after,
+  .page-head::before,
+  .hero-cat img,
+  .footer-cat{animation:none !important}
+  /* .hero-cat rests off-canvas at left:-140px so its walk-across animation
+     can carry it into view — with motion disabled it must be repositioned
+     onto the stage, not just frozen where the keyframe left it (invisible) */
+  .hero-cat{
+    animation:none !important;
+    left:auto !important;
+    right:8%;
+  }
+}
+
+/* ---------- footer mascot ---------- */
+.site-footer{
+  position:relative;
+  padding:32px 0 26px;
+}
+.footer-cat{
+  position:absolute;
+  right:32px;
+  bottom:18px;
+  width:56px;
+  opacity:.85;
+  animation:catBreathe 4s ease-in-out infinite;
+  pointer-events:none;
+}
+.footer-cat img{width:100%;height:auto;display:block}
+@keyframes catBreathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.03)}
+}
+@media(max-width:560px){
+  .footer-cat{display:none}
+}
+
+/* ---------- about page mascot ---------- */
+.about-mascot{
+  margin-top:32px;
+  animation:catBreathe 4s ease-in-out infinite;
+}
+.about-mascot img{
+  width:96px;
+  height:auto;
+  opacity:.92;
+}
+.about-mascot figcaption{
+  margin-top:8px;
+  text-align:center;
+  font:500 10.5px var(--mono);
+  color:var(--ink-faint);
+  letter-spacing:.06em;
 }
