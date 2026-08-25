@@ -17,6 +17,7 @@
   --green:#1e5142;
   --green-soft:rgba(30,81,66,.08);
   --green-line:rgba(30,81,66,.35);
+  --gold:#c9a179;
   --red:#b04a3a;
   --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
   --sans:'Zen Kaku Gothic New','Noto Sans JP',system-ui,-apple-system,sans-serif;
@@ -129,7 +130,7 @@ a{color:inherit;text-decoration:none}
   padding:4px 0;
 }
 .main-nav a:hover{color:var(--ink)}
-.main-nav a::after{
+.main-nav a:not(.btn-pill)::after{
   content:'';
   position:absolute;
   left:0;right:0;bottom:0;
@@ -139,9 +140,9 @@ a{color:inherit;text-decoration:none}
   transform-origin:left;
   transition:transform .25s ease;
 }
-.main-nav a:hover::after{transform:scaleX(1)}
+.main-nav a:not(.btn-pill):hover::after{transform:scaleX(1)}
 .main-nav a[aria-current="page"]{color:var(--ink)}
-.main-nav a[aria-current="page"]::after{transform:scaleX(1)}
+.main-nav a[aria-current="page"]:not(.btn-pill)::after{transform:scaleX(1)}
 
 /* skip link — visible only on keyboard focus */
 .skip-link{
@@ -267,6 +268,11 @@ a{color:inherit;text-decoration:none}
 @keyframes drawLine{
   to{stroke-dashoffset:0}
 }
+/* interactive layer added on top of the two static lines above: a soft
+   antique-gold glow and a short green trail follow the cursor (idly
+   drifting when the pointer isn't over the hero), driven from main.js */
+.hero-trail-dot{fill:var(--green)}
+.hero-cursor-glow{opacity:0}
 .hero-cat{
   position:absolute;
   left:-140px;

@@ -51,6 +51,94 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
+  /* interactive hero lines — a gentle cursor-parallax on the two hero
+     background curves, plus a soft antique-gold glow and short green
+     trail that follow the pointer (idly drifting when it's not over the
+     hero). Only present on the homepage; respects reduced-motion. */
+  const hero = document.querySelector('.hero');
+  const heroLine1 = document.getElementById('hero-line1');
+  const heroLine2 = document.getElementById('hero-line2');
+  const heroTrailG = document.getElementById('hero-trail');
+  const heroGlow = document.getElementById('hero-cursor-glow');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (hero && heroLine1 && heroLine2 && heroTrailG && heroGlow && !prefersReducedMotion) {
+    const TRAIL_LEN = 9;
+    const trailDots = [];
+    const trailHistory = [];
+    for (let i = 0; i < TRAIL_LEN; i++) {
+      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('class', 'hero-trail-dot');
+      dot.setAttribute('r', 0);
+      dot.style.opacity = 0;
+      heroTrailG.appendChild(dot);
+      trailDots.push(dot);
+      trailHistory.push({ x: 720, y: 400 });
+    }
+
+    let rect = hero.getBoundingClientRect();
+    const updateRect = () => { rect = hero.getBoundingClientRect(); };
+    window.addEventListener('resize', updateRect);
+
+    const toViewBox = (clientX, clientY) => ({
+      x: (clientX - rect.left) / rect.width * 1440,
+      y: (clientY - rect.top) / rect.height * 800,
+    });
+
+    let hasPointer = false;
+    let target = { x: 720, y: 400 };
+    hero.addEventListener('pointermove', (e) => {
+      hasPointer = true;
+      target = toViewBox(e.clientX, e.clientY);
+    });
+    hero.addEventListener('pointerleave', () => { hasPointer = false; });
+
+    let t = 0;
+    const idleTarget = () => {
+      t += 0.006;
+      return { x: 720 + Math.sin(t) * 260, y: 400 + Math.cos(t * 0.72) * 168 };
+    };
+
+    const lerp = (a, b, n) => a + (b - a) * n;
+    const pointer = { x: 720, y: 400 };
+    let prevPointer = { x: 720, y: 400 };
+
+    const frame = () => {
+      const idle = idleTarget();
+      pointer.x = lerp(pointer.x, hasPointer ? target.x : idle.x, 0.07);
+      pointer.y = lerp(pointer.y, hasPointer ? target.y : idle.y, 0.07);
+      const speed = Math.hypot(pointer.x - prevPointer.x, pointer.y - prevPointer.y);
+      prevPointer = { x: pointer.x, y: pointer.y };
+
+      trailHistory.unshift({ x: pointer.x, y: pointer.y });
+      trailHistory.length = TRAIL_LEN;
+      trailDots.forEach((dot, i) => {
+        const p = trailHistory[i];
+        const frac = 1 - i / TRAIL_LEN;
+        dot.setAttribute('cx', p.x);
+        dot.setAttribute('cy', p.y);
+        dot.setAttribute('r', Math.max(0, frac * 4.2));
+        dot.style.opacity = frac * 0.36;
+      });
+      heroGlow.setAttribute('cx', pointer.x);
+      heroGlow.setAttribute('cy', pointer.y);
+      const boost = Math.min(1, speed / 30);
+      heroGlow.setAttribute('r', 64 + boost * 46);
+      heroGlow.style.opacity = 0.4 + boost * 0.26;
+
+      // translate only — no rotation, keeps the motion soft and calm
+      const dx = (pointer.x - 720) / 720;
+      const dy = (pointer.y - 400) / 400;
+      heroLine1.setAttribute('transform', `translate(${dx * 46},${dy * 32})`);
+      heroLine2.setAttribute('transform', `translate(${dx * -78},${dy * -56})`);
+
+      requestAnimationFrame(frame);
+    };
+
+    updateRect();
+    requestAnimationFrame(frame);
+  }
+
   /* scroll reveal */
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && revealEls.length) {
