@@ -273,26 +273,7 @@ a{color:inherit;text-decoration:none}
    drifting when the pointer isn't over the hero), driven from main.js */
 .hero-trail-dot{fill:var(--green)}
 .hero-cursor-glow{opacity:0}
-.hero-cat{
-  position:absolute;
-  left:-140px;
-  bottom:14%;
-  width:120px;
-  opacity:.9;
-  animation:catWalkAcross 10s linear infinite;
-}
-/* the outer element carries the slow left-to-right walk; the image inside
-   carries a fast little up/down + tilt cycle so the cat reads as taking
-   quick steps (テクテク) rather than gliding smoothly across the hero */
-.hero-cat img{
-  width:100%;height:auto;display:block;
-  animation:catTrot .4s ease-in-out infinite;
-  transform-origin:50% 100%;
-}
-@keyframes catWalkAcross{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(calc(100vw + 200px))}
-}
+/* shared by the intro loader's cat (.loader-cat img) */
 @keyframes catTrot{
   0%,100%{transform:translateY(0) rotate(0deg)}
   25%{transform:translateY(-4px) rotate(-2deg)}
@@ -1097,16 +1078,7 @@ a{color:inherit;text-decoration:none}
   .site-loader .loader-track::after,
   .hero::before,.hero::after,
   .page-head::before,
-  .hero-cat img,
   .footer-cat{animation:none !important}
-  /* .hero-cat rests off-canvas at left:-140px so its walk-across animation
-     can carry it into view — with motion disabled it must be repositioned
-     onto the stage, not just frozen where the keyframe left it (invisible) */
-  .hero-cat{
-    animation:none !important;
-    left:auto !important;
-    right:8%;
-  }
 }
 
 /* ---------- footer mascot ---------- */
