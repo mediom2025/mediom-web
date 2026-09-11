@@ -2,6 +2,6 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/works-detail/:slug", "destination": "/works-detail-:slug.html" }
+    { "source": "/works-detail/:slug", "destination": "/works-detail-:slug" }
   ]
 }

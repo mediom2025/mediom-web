@@ -2,28 +2,34 @@
    mediom — base styles
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Shippori+Mincho:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@400;500;600;700&display=swap');
 
 :root{
-  --paper:#f0eee9;
-  --paper-light:#faf9f7;
-  --card:#fbfaf6;
+  --paper:#f1ede4;
+  --paper-light:#faf8f2;
+  --card:#fbf9f3;
   --white:#ffffff;
-  --ink:#1a1a1a;
-  --ink-soft:rgba(0,0,0,.62);
-  --ink-faint:rgba(0,0,0,.45);
-  --ink-line:rgba(0,0,0,.12);
-  --ink-line-soft:rgba(0,0,0,.08);
-  --green:#1e5142;
-  --green-soft:rgba(30,81,66,.08);
-  --green-line:rgba(30,81,66,.35);
-  --gold:#c9a179;
+  --ink:#1e1b16;
+  --ink-soft:rgba(30,27,22,.64);
+  --ink-faint:rgba(30,27,22,.46);
+  --ink-line:rgba(30,27,22,.13);
+  --ink-line-soft:rgba(30,27,22,.08);
+  --indigo:#243b57;
+  --indigo-soft:rgba(36,59,87,.07);
+  --indigo-line:rgba(36,59,87,.32);
+  --gold:#a9803f;
+  --gold-line:rgba(169,128,63,.5);
   --red:#b04a3a;
   --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
   --sans:'Zen Kaku Gothic New','Noto Sans JP',system-ui,-apple-system,sans-serif;
-  --serif:'Shippori Mincho','Noto Serif JP',serif;
+  --serif:'Zen Old Mincho','Noto Serif JP',serif;
   --max:1120px;
   --max-wide:1280px;
+
+  /* 茶屋街の木格子を写した反復パターン。「つなぐ」を面で表すための地紋 */
+  --lattice:
+    repeating-linear-gradient(90deg, var(--indigo-line) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(0deg, var(--indigo-line) 0 1px, transparent 1px 26px);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -60,9 +66,9 @@ a{color:inherit;text-decoration:none}
 .eyebrow{
   display:inline-block;
   font:500 10.5px/1 var(--mono);
-  color:var(--green);
-  border:1px solid var(--green-line);
-  background:var(--green-soft);
+  color:var(--indigo);
+  border:1px solid var(--indigo-line);
+  background:var(--indigo-soft);
   padding:5px 10px;
   border-radius:99px;
   letter-spacing:.02em;
@@ -73,7 +79,7 @@ a{color:inherit;text-decoration:none}
   position:sticky;
   top:0;
   z-index:40;
-  background:rgba(240,238,233,.86);
+  background:rgba(241,237,228,.88);
   backdrop-filter:saturate(140%) blur(8px);
   border-bottom:1px solid var(--ink-line-soft);
 }
@@ -88,7 +94,7 @@ a{color:inherit;text-decoration:none}
   align-items:center;
   gap:9px;
   font:600 18px/1 var(--mono);
-  color:var(--green);
+  color:var(--indigo);
   letter-spacing:.01em;
 }
 .logo .logo-mark{
@@ -123,7 +129,9 @@ a{color:inherit;text-decoration:none}
   margin:0;
   padding:0;
 }
-.main-nav a{
+/* :not(.btn-pill) を外すと、この padding が .btn-pill の左右余白を打ち消し、
+   ボタンのラベルが背景からはみ出す（詳細度はこちらが上） */
+.main-nav a:not(.btn-pill){
   font-size:13.5px;
   color:var(--ink-soft);
   position:relative;
@@ -135,7 +143,7 @@ a{color:inherit;text-decoration:none}
   position:absolute;
   left:0;right:0;bottom:0;
   height:1px;
-  background:var(--green);
+  background:var(--indigo);
   transform:scaleX(0);
   transform-origin:left;
   transition:transform .25s ease;
@@ -150,7 +158,7 @@ a{color:inherit;text-decoration:none}
   left:-9999px;
   top:0;
   z-index:100;
-  background:var(--green);
+  background:var(--indigo);
   color:#fff;
   padding:10px 18px;
   border-radius:0 0 8px 0;
@@ -164,12 +172,12 @@ a{color:inherit;text-decoration:none}
   gap:6px;
   font-size:12.5px;
   color:var(--white);
-  background:var(--green);
+  background:var(--indigo);
   padding:10px 22px;
   border-radius:99px;
   white-space:nowrap;
   transition:opacity .25s ease, transform .25s ease, letter-spacing .25s ease;
-  border:1px solid var(--green);
+  border:1px solid var(--indigo);
 }
 .btn-pill:hover{opacity:.88; transform:translateY(-2px); letter-spacing:.02em}
 
@@ -184,7 +192,7 @@ a{color:inherit;text-decoration:none}
   border-radius:99px;
   transition:border-color .25s ease, color .25s ease, transform .25s ease;
 }
-.btn-outline:hover{border-color:var(--green); color:var(--green); transform:translateY(-2px)}
+.btn-outline:hover{border-color:var(--indigo); color:var(--indigo); transform:translateY(-2px)}
 
 .btn-pill-white{
   display:inline-flex;
@@ -204,7 +212,7 @@ a{color:inherit;text-decoration:none}
   background:none;
   border:0;
   font-size:22px;
-  color:var(--green);
+  color:var(--indigo);
   cursor:pointer;
 }
 
@@ -217,16 +225,16 @@ a{color:inherit;text-decoration:none}
   justify-content:center;
   overflow:hidden;
   background:
-    radial-gradient(circle at 18% 22%, rgba(30,81,66,.10), transparent 45%),
-    radial-gradient(circle at 82% 78%, rgba(30,81,66,.08), transparent 42%),
-    linear-gradient(150deg,#eae7e0,#f4f2ec 55%,#e7e3da);
+    radial-gradient(circle at 18% 22%, rgba(36,59,87,.10), transparent 45%),
+    radial-gradient(circle at 82% 78%, rgba(36,59,87,.07), transparent 42%),
+    linear-gradient(150deg,#e9e4d9,#f5f2e9 55%,#e6e0d3);
   border-bottom:1px solid var(--ink-line-soft);
 }
 .hero::before,
 .hero::after{
   content:'';
   position:absolute;
-  border:1px solid var(--green-line);
+  border:1px solid var(--indigo-line);
   border-radius:50%;
   opacity:.35;
   pointer-events:none;
@@ -254,7 +262,7 @@ a{color:inherit;text-decoration:none}
 }
 .hero-lines path{
   fill:none;
-  stroke:var(--green);
+  stroke:var(--indigo);
   stroke-width:1;
   opacity:.28;
   stroke-dasharray:1400;
@@ -269,9 +277,9 @@ a{color:inherit;text-decoration:none}
   to{stroke-dashoffset:0}
 }
 /* interactive layer added on top of the two static lines above: a soft
-   antique-gold glow and a short green trail follow the cursor (idly
+   antique-gold glow and a short indigo trail follow the cursor (idly
    drifting when the pointer isn't over the hero), driven from main.js */
-.hero-trail-dot{fill:var(--green)}
+.hero-trail-dot{fill:var(--indigo)}
 .hero-cursor-glow{opacity:0}
 /* shared by the intro loader's cat (.loader-cat img) */
 @keyframes catTrot{
@@ -366,7 +374,7 @@ a{color:inherit;text-decoration:none}
   flex:none;
 }
 .news-strip a{color:var(--ink-soft)}
-.news-strip a:hover{color:var(--green)}
+.news-strip a:hover{color:var(--indigo)}
 
 /* ---------- sections ---------- */
 .section{
@@ -420,7 +428,7 @@ a{color:inherit;text-decoration:none}
 .service-row:hover{padding-left:14px}
 .service-row .num{
   font:600 12px var(--mono);
-  color:var(--green);
+  color:var(--indigo);
   flex:none;
 }
 .service-row .name{
@@ -439,7 +447,7 @@ a{color:inherit;text-decoration:none}
   color:var(--ink-faint);
   transition:transform .25s ease, color .25s ease;
 }
-.service-row:hover .arrow{color:var(--green); transform:translateX(4px)}
+.service-row:hover .arrow{color:var(--indigo); transform:translateX(4px)}
 
 @media(min-width:760px){
   .service-row .desc{display:block}
@@ -489,7 +497,7 @@ a{color:inherit;text-decoration:none}
   aspect-ratio:4/3;
   border-radius:12px;
   border:1px solid var(--ink-line);
-  background:linear-gradient(135deg,#e9e5db,#f3f1ea);
+  background:linear-gradient(135deg,#e9e4d9,#f5f2e9);
   overflow:hidden;
   position:relative;
   transition:transform .35s ease;
@@ -512,7 +520,7 @@ a{color:inherit;text-decoration:none}
   color:var(--ink);
   transition:color .2s ease;
 }
-.work-card:hover .work-title{color:var(--green)}
+.work-card:hover .work-title{color:var(--indigo)}
 .work-sub{
   font:500 10.5px var(--mono);
   color:var(--ink-faint);
@@ -536,8 +544,8 @@ a{color:inherit;text-decoration:none}
   transition:all .2s ease;
 }
 .chip.active,.chip:hover{
-  background:var(--green);
-  border-color:var(--green);
+  background:var(--indigo);
+  border-color:var(--indigo);
   color:#fff;
 }
 
@@ -551,7 +559,7 @@ a{color:inherit;text-decoration:none}
 .about-photo{
   aspect-ratio:4/3;
   border-radius:14px;
-  background:linear-gradient(135deg,#e7e4de,#f2f0ec);
+  background:linear-gradient(135deg,#e8e3d8,#f3f0e7);
   border:1px solid var(--ink-line);
   display:flex;align-items:center;justify-content:center;
   font:500 11px var(--mono);
@@ -569,7 +577,7 @@ a{color:inherit;text-decoration:none}
   display:inline-block;
   margin-top:14px;
   font:500 12px var(--mono);
-  color:var(--green);
+  color:var(--indigo);
 }
 
 /* news list */
@@ -592,8 +600,8 @@ a{color:inherit;text-decoration:none}
 }
 .news-item .tag{
   font:500 10px var(--mono);
-  color:var(--green);
-  border:1px solid var(--green-line);
+  color:var(--indigo);
+  border:1px solid var(--indigo-line);
   padding:3px 9px;
   border-radius:99px;
   flex:none;
@@ -621,8 +629,8 @@ a{color:inherit;text-decoration:none}
   color:var(--ink-soft);
 }
 .pagination .active{
-  border-color:var(--green);
-  color:var(--green);
+  border-color:var(--indigo);
+  color:var(--indigo);
 }
 
 /* value / company info */
@@ -637,7 +645,7 @@ a{color:inherit;text-decoration:none}
   border-radius:10px;
   background:var(--card);
 }
-.value-item .num{font:600 12px var(--mono);color:var(--green)}
+.value-item .num{font:600 12px var(--mono);color:var(--indigo)}
 .value-item .title{font-size:14px;color:var(--ink);margin-top:8px}
 .value-item .desc{font-size:12px;line-height:1.8;color:var(--ink-faint);margin-top:8px}
 
@@ -672,13 +680,13 @@ a{color:inherit;text-decoration:none}
   text-align:center;
   border-radius:8px;
 }
-.step .num{font:600 12px var(--mono);color:var(--green)}
+.step .num{font:600 12px var(--mono);color:var(--indigo)}
 .step .name{font-size:13px;color:var(--ink);margin-top:6px}
 
 /* detail page */
 .detail-hero{
   aspect-ratio:16/7;
-  background:linear-gradient(135deg,#e0ddd6,#eceae5);
+  background:linear-gradient(135deg,#e1dbcf,#edeae0);
   border-bottom:1px solid var(--ink-line);
   display:flex;align-items:center;justify-content:center;
   color:rgba(0,0,0,.4);
@@ -702,7 +710,7 @@ a{color:inherit;text-decoration:none}
   margin-bottom:4px;
 }
 .quote{
-  border-left:3px solid var(--green);
+  border-left:3px solid var(--indigo);
   padding-left:18px;
   font-size:14px;
   line-height:1.95;
@@ -717,7 +725,7 @@ a{color:inherit;text-decoration:none}
 .figure-slot{
   border-radius:10px;
   border:1px solid var(--ink-line);
-  background:linear-gradient(135deg,#e7e4de,#f2f0ec);
+  background:linear-gradient(135deg,#e8e3d8,#f3f0e7);
   aspect-ratio:16/9;
   display:flex;align-items:center;justify-content:center;
   color:rgba(0,0,0,.4);
@@ -733,7 +741,7 @@ a{color:inherit;text-decoration:none}
 
 /* CTA band */
 .cta-band{
-  background:var(--green);
+  background:var(--indigo);
   padding:64px 0;
   text-align:center;
 }
@@ -785,7 +793,7 @@ a{color:inherit;text-decoration:none}
   font-size:12.5px;
 }
 .footer-nav a,.footer-contact a,.footer-contact span{color:var(--ink-soft)}
-.footer-nav a:hover,.footer-contact a:hover{color:var(--green)}
+.footer-nav a:hover,.footer-contact a:hover{color:var(--indigo)}
 .footer-bottom{
   display:flex;
   justify-content:space-between;
@@ -797,7 +805,7 @@ a{color:inherit;text-decoration:none}
   color:var(--ink-faint);
 }
 .footer-bottom a{color:var(--ink-faint)}
-.footer-bottom a:hover{color:var(--green)}
+.footer-bottom a:hover{color:var(--indigo)}
 @media(max-width:760px){
   .footer-grid{grid-template-columns:1fr 1fr}
   .footer-brand{grid-column:1 / -1;margin-bottom:8px}
@@ -831,7 +839,7 @@ a{color:inherit;text-decoration:none}
 }
 .field input:focus,.field select:focus,.field textarea:focus{
   outline:none;
-  border-color:var(--green);
+  border-color:var(--indigo);
   background:#fff;
 }
 .field textarea{resize:vertical;min-height:110px}
@@ -855,12 +863,12 @@ a{color:inherit;text-decoration:none}
   width:1px;height:1px;
 }
 .radio-opt.selected{
-  border-color:var(--green);
-  background:var(--green-soft);
-  color:var(--green);
+  border-color:var(--indigo);
+  background:var(--indigo-soft);
+  color:var(--indigo);
 }
 .radio-opt:has(input:focus-visible){
-  outline:2px solid var(--green);
+  outline:2px solid var(--indigo);
   outline-offset:2px;
 }
 .checkbox-field{display:flex;align-items:flex-start;gap:10px}
@@ -888,7 +896,7 @@ a{color:inherit;text-decoration:none}
   color:var(--ink-faint);
   margin-bottom:30px;
 }
-.step-indicator .current{color:var(--green)}
+.step-indicator .current{color:var(--indigo)}
 .error-msg{
   color:var(--red);
   font-size:11.5px;
@@ -913,17 +921,18 @@ a{color:inherit;text-decoration:none}
   padding:88px 0 64px;
   border-bottom:1px dashed var(--ink-line);
 }
+/* 茶屋街の木格子を写した地紋。ページ見出しの右肩に、光が差した程度の濃さで置く */
 .page-head::before{
   content:'';
   position:absolute;
-  top:-140px;
-  right:-120px;
-  width:420px;
-  height:420px;
-  border:1px solid var(--green-line);
-  border-radius:50%;
-  opacity:.3;
-  animation:driftSlow 24s ease-in-out infinite;
+  top:0;
+  right:0;
+  width:min(340px,38vw);
+  height:100%;
+  background-image:var(--lattice);
+  opacity:.5;
+  -webkit-mask-image:linear-gradient(255deg,#000,transparent 72%);
+  mask-image:linear-gradient(255deg,#000,transparent 72%);
   pointer-events:none;
 }
 .page-head .container{position:relative;z-index:1}
@@ -953,7 +962,7 @@ a{color:inherit;text-decoration:none}
 }
 .prev-next .thumb{
   aspect-ratio:16/9;
-  background:linear-gradient(135deg,#e7e4de,#f2f0ec);
+  background:linear-gradient(135deg,#e8e3d8,#f3f0e7);
   border:1px solid var(--ink-line);
   overflow:hidden;
 }
@@ -975,7 +984,7 @@ a{color:inherit;text-decoration:none}
 .mobile-nav{
   position:fixed;
   inset:0;
-  background:var(--green);
+  background:var(--indigo);
   z-index:60;
   display:flex;
   flex-direction:column;
@@ -1061,7 +1070,7 @@ a{color:inherit;text-decoration:none}
   display:block;
   width:40%;
   height:100%;
-  background:var(--green);
+  background:var(--indigo);
   animation:loaderTrack 1.1s ease-in-out infinite;
 }
 @keyframes loaderTrack{
@@ -1105,18 +1114,51 @@ a{color:inherit;text-decoration:none}
 
 /* ---------- about page mascot ---------- */
 .about-mascot{
-  margin-top:32px;
-  animation:catBreathe 4s ease-in-out infinite;
+  display:flex;
+  align-items:flex-end;
+  gap:14px;
+  width:max-content;
+  margin:48px 0 0;
 }
 .about-mascot img{
   width:96px;
   height:auto;
   opacity:.92;
+  animation:catBreathe 4s ease-in-out infinite;
+  transform-origin:bottom center;
 }
 .about-mascot figcaption{
-  margin-top:8px;
-  text-align:center;
+  padding-bottom:10px;
   font:500 10.5px var(--mono);
   color:var(--ink-faint);
   letter-spacing:.06em;
+  white-space:nowrap;
+}
+
+/* ---------- 金の一線 ---------- */
+/* 金は面で使うと成金的になるので、見出しに添える1pxの罫線だけに留める */
+.section-head .label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.section-head .label::before{
+  content:'';
+  flex:none;
+  width:28px;
+  height:1px;
+  background:var(--gold);
+}
+
+/* ---------- 墨のマスク ---------- */
+/* 写真の下端を矩形でなく筆で破いたような輪郭で切る。
+   強いアクセントなので事例ページのヒーローだけに使う */
+.detail-hero{
+  clip-path:polygon(
+    0% 0%, 100% 0%, 100% 88%,
+    93% 92%, 86% 89%, 79% 94%, 71% 90%, 64% 95%,
+    56% 91%, 48% 96%, 40% 92%, 33% 97%, 25% 93%,
+    17% 97%, 9% 93%, 0% 96%
+  );
+  border-bottom:none;
 }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://mediom.jp/</loc></url>
-  <url><loc>https://mediom.jp/about</loc></url>
-  <url><loc>https://mediom.jp/service</loc></url>
-  <url><loc>https://mediom.jp/works</loc></url>
-  <url><loc>https://mediom.jp/news</loc></url>
-  <url><loc>https://mediom.jp/contact</loc></url>
-  <url><loc>https://mediom.jp/works-detail/aoba</loc></url>
-  <url><loc>https://mediom.jp/works-detail/green-kitchen</loc></url>
-  <url><loc>https://mediom.jp/works-detail/nagomi</loc></url>
-  <url><loc>https://mediom.jp/works-detail/sora-coffee</loc></url>
-  <url><loc>https://mediom.jp/works-detail/hanare</loc></url>
-  <url><loc>https://mediom.jp/works-detail/tsumugi</loc></url>
+  <url><loc>https://mediom-web.vercel.app/</loc></url>
+  <url><loc>https://mediom-web.vercel.app/about</loc></url>
+  <url><loc>https://mediom-web.vercel.app/service</loc></url>
+  <url><loc>https://mediom-web.vercel.app/works</loc></url>
+  <url><loc>https://mediom-web.vercel.app/news</loc></url>
+  <url><loc>https://mediom-web.vercel.app/contact</loc></url>
+  <url><loc>https://mediom-web.vercel.app/works-detail/aoba</loc></url>
+  <url><loc>https://mediom-web.vercel.app/works-detail/green-kitchen</loc></url>
+  <url><loc>https://mediom-web.vercel.app/works-detail/nagomi</loc></url>
+  <url><loc>https://mediom-web.vercel.app/works-detail/sora-coffee</loc></url>
+  <url><loc>https://mediom-web.vercel.app/works-detail/hanare</loc></url>
+  <url><loc>https://mediom-web.vercel.app/works-detail/tsumugi</loc></url>
 </urlset>

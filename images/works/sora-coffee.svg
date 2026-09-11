@@ -1,19 +1,19 @@
 <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sora Coffee Package">
 <defs>
 <radialGradient id="g-soraa" cx="14%" cy="18%" r="65%">
-<stop offset="0%" stop-color="#eae7e0"/>
-<stop offset="100%" stop-color="#f4f2ec"/>
+<stop offset="0%" stop-color="#e9e4d9"/>
+<stop offset="100%" stop-color="#f5f2e9"/>
 </radialGradient>
 <radialGradient id="g-sorab" cx="88%" cy="90%" r="55%">
-<stop offset="0%" stop-color="#e6e2da" stop-opacity="0.9"/>
-<stop offset="100%" stop-color="#f4f2ec" stop-opacity="0"/>
+<stop offset="0%" stop-color="#e6e0d3" stop-opacity="0.9"/>
+<stop offset="100%" stop-color="#f5f2e9" stop-opacity="0"/>
 </radialGradient>
 </defs>
 <rect width="800" height="600" fill="url(#g-soraa)"/>
 <rect width="800" height="600" fill="url(#g-sorab)"/>
-<circle cx="700" cy="40" r="230" fill="none" stroke="#1e5142" stroke-opacity="0.16" stroke-width="1"/>
-<circle cx="30" cy="580" r="170" fill="none" stroke="#1e5142" stroke-opacity="0.16" stroke-width="1"/>
-<g stroke="#1e5142" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="700" cy="40" r="230" fill="none" stroke="#243b57" stroke-opacity="0.16" stroke-width="1"/>
+<circle cx="30" cy="580" r="170" fill="none" stroke="#243b57" stroke-opacity="0.16" stroke-width="1"/>
+<g stroke="#243b57" fill="none" stroke-linecap="round" stroke-linejoin="round">
 
 <path d="M300 280 L330 430 C332 445 348 456 364 456 L436 456 C452 456 468 445 470 430 L500 280 Z" stroke-width="2.2" stroke-opacity="0.75"/>
 <path d="M470 300 C505 300 522 320 522 345 C522 370 505 388 470 386" stroke-width="2" stroke-opacity="0.7"/>
@@ -23,6 +23,6 @@
 <ellipse cx="590" cy="410" rx="34" ry="24" transform="rotate(-25 590 410)" stroke-width="2" stroke-opacity="0.55"/>
 <path d="M566 402 C580 408 596 412 612 406" stroke-width="1.4" stroke-opacity="0.45"/>
 </g>
-<text x="42" y="546" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="15" letter-spacing="3" fill="#1e5142" fill-opacity="0.5">SORA COFFEE — BRANDING</text>
-<line x1="42" y1="90" x2="42" y2="130" stroke="#1e5142" stroke-opacity="0.35" stroke-width="1"/>
+<text x="42" y="546" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="15" letter-spacing="3" fill="#243b57" fill-opacity="0.5">SORA COFFEE — BRANDING</text>
+<line x1="42" y1="90" x2="42" y2="130" stroke="#243b57" stroke-opacity="0.35" stroke-width="1"/>
 </svg>
