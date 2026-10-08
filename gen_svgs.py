@@ -6,17 +6,17 @@ Not shipped as a page dependency -- safe to delete after use, kept in-repo
 so the placeholder art can be regenerated/tweaked later without redoing it by hand.
 """
 
-GREEN = "#243b57"
+GREEN = "#1e5142"
 
 WRAP_OPEN = '''<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{label}">
 <defs>
 <radialGradient id="g-{key}a" cx="14%" cy="18%" r="65%">
-<stop offset="0%" stop-color="#e9e4d9"/>
-<stop offset="100%" stop-color="#f5f2e9"/>
+<stop offset="0%" stop-color="#eae7e0"/>
+<stop offset="100%" stop-color="#f4f2ec"/>
 </radialGradient>
 <radialGradient id="g-{key}b" cx="88%" cy="90%" r="55%">
-<stop offset="0%" stop-color="#e6e0d3" stop-opacity="0.9"/>
-<stop offset="100%" stop-color="#f5f2e9" stop-opacity="0"/>
+<stop offset="0%" stop-color="#e6e2da" stop-opacity="0.9"/>
+<stop offset="100%" stop-color="#f4f2ec" stop-opacity="0"/>
 </radialGradient>
 </defs>
 <rect width="800" height="600" fill="url(#g-{key}a)"/>
@@ -150,7 +150,7 @@ motifs["service-uiux"] = wrap("svc-uiux", "UI/UXデザイン", "03 — UI/UX", f
 <rect x="270" y="230" width="120" height="56" rx="28" stroke-width="2.2" stroke-opacity="0.7"/>
 <circle cx="352" cy="258" r="20" fill="{GREEN}" fill-opacity="0.55" stroke="none"/>
 <line x1="270" y1="340" x2="470" y2="340" stroke-width="2" stroke-opacity="0.55"/>
-<circle cx="380" cy="340" r="14" fill="#f5f2e9" stroke-width="2.2" stroke-opacity="0.75"/>
+<circle cx="380" cy="340" r="14" fill="#f4f2ec" stroke-width="2.2" stroke-opacity="0.75"/>
 <rect x="270" y="400" width="220" height="60" rx="10" stroke-width="1.8" stroke-opacity="0.5"/>
 <path d="M540 250 L540 400 L570 370 L590 410 L605 402 L585 362 L620 358 Z" stroke-width="2" stroke-opacity="0.7" stroke-linejoin="round"/>
 ''')
