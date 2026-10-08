@@ -2,9 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>mediom | つなぐ瞬間を、デザインする。</title>
-<meta name="description" content="mediomは、ブランディング・Webサイト制作・UI/UXデザインを手がけるデザインスタジオです。人と人、人と社会をつなぐ瞬間に、良いデザインを。">
+<meta name="description" content="mediomは、ブランディング・Webサイト制作・UI/UXデザインと、AIで業務を組み替えるAX支援を手がける金沢のスタジオです。">
 <link rel="canonical" href="https://mediom-web.vercel.app/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
@@ -12,15 +12,18 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="mediom">
 <meta property="og:title" content="mediom | つなぐ瞬間を、デザインする。">
-<meta property="og:description" content="mediomは、ブランディング・Webサイト制作・UI/UXデザインを手がけるデザインスタジオです。人と人、人と社会をつなぐ瞬間に、良いデザインを。">
+<meta property="og:description" content="mediomは、ブランディング・Webサイト制作・UI/UXデザインと、AIで業務を組み替えるAX支援を手がける金沢のスタジオです。">
 <meta property="og:url" content="https://mediom-web.vercel.app/">
 <meta property="og:image" content="https://mediom-web.vercel.app/images/og-default.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="mediom | つなぐ瞬間を、デザインする。">
-<meta name="twitter:description" content="mediomは、ブランディング・Webサイト制作・UI/UXデザインを手がけるデザインスタジオです。人と人、人と社会をつなぐ瞬間に、良いデザインを。">
+<meta name="twitter:description" content="mediomは、ブランディング・Webサイト制作・UI/UXデザインと、AIで業務を組み替えるAX支援を手がける金沢のスタジオです。">
 <meta name="twitter:image" content="https://mediom-web.vercel.app/images/og-default.png">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/css/style.css?v=20261008">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -28,16 +31,9 @@
   "name": "mediom",
   "url": "https://mediom-web.vercel.app",
   "logo": "https://mediom-web.vercel.app/favicon.png",
-  "description": "mediomは、ブランディング・Webサイト制作・UI/UXデザインを手がけるデザインスタジオです。",
+  "description": "mediomは、ブランディング・Webサイト制作・UI/UXデザインと、AIで業務を組み替えるAX支援を手がけるスタジオです。",
   "email": "hello@mediom.jp",
-  "foundingDate": "2019-04",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "神宮前5-2-2",
-    "addressLocality": "渋谷区",
-    "addressRegion": "東京都",
-    "addressCountry": "JP"
-  }
+  "foundingDate": "2019-04"
 }
 </script>
 </head>
@@ -51,215 +47,185 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt=""><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom"></a>
-    <nav class="main-nav" aria-label="グローバルナビゲーション">
-      <ul>
-        <li><a href="/about">会社概要</a></li>
-        <li><a href="/service">サービス</a></li>
-        <li><a href="/works">実績</a></li>
-        <li><a href="/news">ニュース</a></li>
-      </ul>
-      <a href="/contact" class="btn-pill">お問い合わせ</a>
-    </nav>
-    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt="" width="400" height="205"><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom" width="700" height="112"></a>
+    <nav class="main-nav" aria-label="グローバルナビゲーション"><a href="/about">About</a><a href="/service">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">Contact</a></nav>
+    <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav"><i></i><i></i></button>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="メニュー" hidden><a href="/about">About</a><a href="/service">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">お問い合わせ</a></nav>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobile-nav">
-  <button class="close-btn" aria-label="閉じる">×</button>
-  <a href="/about">会社概要</a>
-  <a href="/service">サービス</a>
-  <a href="/works">実績</a>
-  <a href="/news">ニュース</a>
-  <a href="/contact">お問い合わせ</a>
-</div>
-
 <main id="main">
 <section class="hero">
-  <svg class="hero-lines" viewBox="0 0 1440 800" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <radialGradient id="heroGlowGold" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#a9803f" stop-opacity="0.4"/>
-        <stop offset="55%" stop-color="#c9a870" stop-opacity="0.13"/>
-        <stop offset="100%" stop-color="#c9a870" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-    <path id="hero-line1" d="M -50 620 C 300 500, 500 700, 820 420 S 1300 200, 1500 260" />
-    <path id="hero-line2" d="M -50 180 C 250 320, 650 60, 980 260 S 1350 520, 1500 480" />
-    <g id="hero-trail"></g>
-    <circle id="hero-cursor-glow" class="hero-cursor-glow" r="70" fill="url(#heroGlowGold)"></circle>
-  </svg>
-  <div class="hero-inner">
-    <span class="eyebrow">mediom design studio</span>
-    <h1 class="hero-copy">つなぐ瞬間を、<br>デザインする。</h1>
-    <div class="hero-sub">DESIGNING CONNECTION MOMENTS</div>
-  </div>
-  <div class="hero-scroll"><span></span>SCROLL</div>
-</section>
-
-<div class="news-strip">
   <div class="container">
-    <span class="tag">NEWS</span>
-    <span class="date">2026.08.18</span>
-    <a href="/news">コーポレートサイトをリニューアルしました</a>
-  </div>
-</div>
-
-<section class="section reveal">
-  <div class="container">
-    <div class="section-head">
-      <span class="label">01 — Mission</span>
-      <h2 class="section-title">つくることは、つなぐこと。</h2>
+    <div class="hero-copy">
+      <span class="eyebrow">Designing connection moments</span>
+      <h1>つなぐ瞬間を、<br>デザインする。</h1>
+      <p class="lead">ブランドとWebのデザイン、AIによる業務の組み替え。金沢を拠点に、伝わる状態と回る状態をつくります。</p>
     </div>
-    <div class="mission-text">
-      <p>私たちmediomは、人と人、人と社会をつなぐ瞬間に、良いデザインを届けるスタジオです。ブランディングからWebサイト制作、UI/UXデザインまで、一貫した思想でものづくりに向き合っています。</p>
-      <p>小さな違和感を見逃さず、使う人の体験に寄り添うこと。そこに私たちの仕事の軸があります。</p>
-    </div>
+    <div class="hero-art" id="hero-art" aria-hidden="true"></div>
   </div>
 </section>
 
-<section class="section reveal">
+<section class="section mist">
   <div class="container">
-    <div class="section-head">
-      <span class="label">02 — Service</span>
-      <h2 class="section-title">提供するサービス</h2>
-    </div>
-    <div class="service-list">
-      <a class="service-row" href="/service#branding">
-        <span class="num">01</span>
-        <span class="name">ブランディング</span>
-        <span class="desc">企業やプロダクトの本質を見極め、一貫したビジュアルへ。</span>
-        <span class="arrow">→</span>
-      </a>
-      <a class="service-row" href="/service#web">
-        <span class="num">02</span>
-        <span class="name">Webサイト制作</span>
-        <span class="desc">戦略設計からUI/UXデザイン、実装まで一気通貫で。</span>
-        <span class="arrow">→</span>
-      </a>
-      <a class="service-row" href="/service#uiux">
-        <span class="num">03</span>
-        <span class="name">UI/UXデザイン</span>
-        <span class="desc">使い心地を、ユーザー視点で磨き上げます。</span>
-        <span class="arrow">→</span>
-      </a>
-    </div>
+    <div class="sechead"><div class="hd"><span class="eyebrow">Works</span><h2>手がけた仕事</h2></div><a class="more" href="/works">すべての実績</a></div>
+
+        <div class="wk" data-category="web branding">
+          <div class="media-col">
+            <div class="devices">
+              <div class="laptop"><div class="lid"><span class="cam" aria-hidden="true"></span><img src="/images/works/kise-gaiko-pc.jpg" alt="喜瀬外構のサイトをPCで表示した画面。カーポートの写真に「一枚の塀から、一邸の外構まで。」の見出し" loading="lazy" width="1100" height="664"></div><div class="base"><span class="lip" aria-hidden="true"></span></div></div>
+              <div class="phone"><span class="island" aria-hidden="true"></span><img src="/images/works/kise-gaiko-sp.jpg" alt="喜瀬外構のサイトをスマホで表示した画面" loading="lazy" width="500" height="1083"></div>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="meta-en">2026</span>
+            <h3>Kise Gaiko</h3>
+            <p class="cl">喜瀬外構 ／ 外構・エクステリア工事</p>
+            <div class="tags"><span class="tag">コーポレートサイト</span><span class="tag">ブランディング</span><span class="tag">ロゴ</span><span class="tag">名刺</span></div>
+            <a class="visit" href="https://www.kisegaiko.com/" target="_blank" rel="noopener">サイトを見る ↗</a>
+          </div>
+        </div>
+
+        <div class="wk rev" data-category="video">
+          <div class="media-col">
+            <a class="video-thumb" href="https://youtu.be/3HvZhupKbCI" target="_blank" rel="noopener" aria-label="YouTubeで「風趣の家」を見る"><img src="/images/works/notohibakara-noie.jpg" alt="NOTOHIBAKARAnoieの動画の一場面。塗り壁のロゴサインに「One House, One Story」の文字" loading="lazy" width="1000" height="554"><span class="play" aria-hidden="true">▶</span></a>
+          </div>
+          <div class="meta">
+            <span class="meta-en">2025</span>
+            <h3>NOTOHIBAKARAnoie</h3>
+            <p class="cl">能登ヒバの注文住宅 ／ 施工事例動画・ストーリー動画</p>
+            <div class="tags"><span class="tag">動画制作</span><span class="tag">施工事例</span><span class="tag">ブランドストーリー</span></div>
+            <a class="visit" href="https://youtu.be/3HvZhupKbCI" target="_blank" rel="noopener">「風趣の家」を見る ↗</a>
+          </div>
+        </div>
+
+        <div class="wk" data-category="ax">
+          <div class="media-col">
+            <div class="devices solo">
+              <div class="laptop"><div class="lid"><span class="cam" aria-hidden="true"></span>
+                <div class="demo-fit"><div class="demo-office" id="demo-office-1" aria-live="polite">
+                  <div class="do-head"><div class="do-brand"><b>AI参謀室</b><span>7体のAIエージェントが働くオフィス</span></div><div class="do-roll"><span class="do-av"><i>長</i><em>参謀長</em></span><span class="do-av"><i>調</i><em>調査</em></span><span class="do-av"><i>規</i><em>規制</em></span><span class="do-av"><i>流</i><em>物流</em></span><span class="do-av"><i>財</i><em>財務</em></span><span class="do-av"><i>文</i><em>文章</em></span><span class="do-av"><i>集</i><em>集客</em></span></div></div>
+                  <div class="do-body">
+                    <div class="do-req"><span>依頼</span><b>新しい販路を試すべきか、判断材料をまとめて</b></div>
+                    <ol class="do-ph"><li>受付</li><li>整理</li><li>調査</li><li>点検</li><li>統合</li><li>確認待ち</li></ol>
+                    <div class="do-floor">
+                      <div class="do-desks"><div class="do-desk"><div class="do-who"><i>調</i>調査<span class="do-lamp">待機</span></div><div class="do-paper"></div></div><div class="do-desk"><div class="do-who"><i>規</i>規制<span class="do-lamp">待機</span></div><div class="do-paper"></div></div><div class="do-desk"><div class="do-who"><i>流</i>物流<span class="do-lamp">待機</span></div><div class="do-paper"></div></div><div class="do-desk"><div class="do-who"><i>財</i>財務<span class="do-lamp">待機</span></div><div class="do-paper"></div></div><div class="do-desk"><div class="do-who"><i>文</i>文章<span class="do-lamp">待機</span></div><div class="do-paper"></div></div><div class="do-desk"><div class="do-who"><i>集</i>集客<span class="do-lamp">待機</span></div><div class="do-paper"></div></div></div>
+                      <div class="do-side">
+                        <div class="do-seals"><span>審</span><span>反</span><span>監</span></div>
+                        <div class="do-memo"><span>判断メモ</span><p>結論 → 根拠 → 次の一手の順にまとめ、要確認の点を明記して提出します。</p></div>
+                      </div>
+                    </div>
+                  </div>
+                </div></div>
+              </div><div class="base"><span class="lip" aria-hidden="true"></span></div></div>
+            </div>
+            <button type="button" class="demo-btn" data-demo="office" data-target="demo-office-1">サンプルを動かす <span aria-hidden="true">▶</span></button>
+          </div>
+          <div class="meta">
+            <span class="meta-en">AX ／ AI Agents</span>
+            <h3>AI参謀室</h3>
+            <p class="cl">経営判断の材料づくりを、AIエージェントのチームで</p>
+            <p class="desc">調査・規制・物流・財務などの担当AIと、まとめ役の参謀長が依頼を分担して調べます。別のAIが3つの視点で点検してから、判断材料を経営者に渡します。実行はせず、決めるのは人です。</p>
+            <div class="tags"><span class="tag">AX支援</span><span class="tag">AIエージェント</span><span class="tag">業務設計</span></div>
+            <p class="note">画面は動きを再現したサンプルです</p>
+          </div>
+        </div>
+
+        <div class="wk rev" data-category="ax video">
+          <div class="media-col">
+            <div class="reel-wrap">
+              <div class="phone reel"><span class="island" aria-hidden="true"></span>
+                <div class="reel-screen" id="demo-reel-2" aria-live="polite">
+                  <div class="rs-bar"><i></i></div>
+                  <div class="scene"><span>01</span>商品写真<em>✓</em></div>
+                  <div class="scene"><span>02</span>訴求コピー<em>✓</em></div>
+                  <div class="scene"><span>03</span>締めの案内<em>✓</em></div>
+                  <div class="rs-play"><b></b><small>完成 0:15</small></div>
+                  <div class="ratio">9:16</div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="demo-btn" data-demo="reel" data-target="demo-reel-2">サンプルを動かす <span aria-hidden="true">▶</span></button>
+          </div>
+          <div class="meta">
+            <span class="meta-en">AX ／ Video</span>
+            <h3>Instagram広告 動画作成ツール</h3>
+            <p class="cl">広告用の縦型動画を、社内ですばやくつくる仕組み</p>
+            <div class="ax-metric"><span>1本あたりの制作時間</span><b>5時間 <i aria-hidden="true">→</i> 30分</b></div>
+            <div class="tags"><span class="tag">AX支援</span><span class="tag">AI動画</span></div>
+          </div>
+        </div>
   </div>
 </section>
 
-<section class="section reveal">
+<section class="section">
   <div class="container">
-    <div class="section-head">
-      <span class="label">03 — Works</span>
-      <h2 class="section-title">実績（抜粋）</h2>
-    </div>
-    <div class="works-grid cols-4">
-      <a class="work-card" href="/works-detail/aoba" data-work-category="branding">
-        <div class="work-thumb"><img src="/images/works/aoba.svg" alt="Aoba Corporate Site Renewal" loading="lazy" width="800" height="600"></div>
-        <div class="work-meta">
-          <div class="work-title">Aoba Corporate Site Renewal</div>
-          <div class="work-sub">株式会社Aoba／ブランディング</div>
-        </div>
-      </a>
-      <a class="work-card" href="/works-detail/green-kitchen" data-work-category="web">
-        <div class="work-thumb"><img src="/images/works/green-kitchen.svg" alt="Green Kitchen Brand Site" loading="lazy" width="800" height="600"></div>
-        <div class="work-meta">
-          <div class="work-title">Green Kitchen Brand Site</div>
-          <div class="work-sub">Green Kitchen／Webサイト制作</div>
-        </div>
-      </a>
-      <a class="work-card" href="/works-detail/nagomi" data-work-category="uiux">
-        <div class="work-thumb"><img src="/images/works/nagomi.svg" alt="Nagomi Estate App" loading="lazy" width="800" height="600"></div>
-        <div class="work-meta">
-          <div class="work-title">Nagomi Estate App</div>
-          <div class="work-sub">Nagomi不動産／UI/UXデザイン</div>
-        </div>
-      </a>
-      <a class="work-card" href="/works-detail/sora-coffee" data-work-category="branding">
-        <div class="work-thumb"><img src="/images/works/sora-coffee.svg" alt="Sora Coffee Package" loading="lazy" width="800" height="600"></div>
-        <div class="work-meta">
-          <div class="work-title">Sora Coffee Package</div>
-          <div class="work-sub">Sora Coffee／ブランディング</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section reveal">
-  <div class="container">
-    <div class="section-head">
-      <span class="label">04 — About</span>
-    </div>
-    <div class="about-split">
-      <div class="about-photo"><img src="/images/about-studio.svg" alt="mediomのスタジオ" loading="lazy"></div>
+    <div class="about-top">
       <div>
-        <div class="about-title">私たちのこと</div>
-        <p class="about-text">2019年の創業から、規模の大小を問わず様々なブランド・プロダクトのデザインに携わってきました。本質を見極め、使う人に寄り添うものづくりを大切にしています。</p>
-        <a class="about-link" href="/about">詳しく見る →</a>
+        <span class="eyebrow">About</span>
+        <h2 class="motto">つくることは、<br>つなぐこと。</h2>
       </div>
+      <p class="lead">mediomは、人と人、人と社会をつなぐ瞬間をデザインするスタジオです。ブランドやWebサイトをつくることと、AIで日々の業務を組み替えること。どちらも、伝わる状態と、回る状態をつくる仕事だと考えています。</p>
+    </div>
+    <div class="cols">
+      <div><h3>見極める</h3><p>流行やスタイルより先に、その企業やプロダクトが本来持つ価値は何かを問い直します。</p></div>
+      <div><h3>寄り添う</h3><p>見た目の美しさだけでなく、実際に使う人と、現場で働く人の体験を起点に組み立てます。</p></div>
+      <div><h3>続く形にする</h3><p>つくって終わりにせず、運用の手順やAIの仕組みまで含めて、続けられる形に整えます。</p></div>
     </div>
   </div>
 </section>
 
-<section class="section reveal">
+<section class="section mist">
   <div class="container">
-    <div class="section-head">
-      <span class="label">05 — News</span>
-    </div>
-    <div class="news-list" style="border-top:1px solid var(--ink-line)">
-      <div class="news-item">
-        <span class="date">2026.08.18</span>
-        <span class="title">コーポレートサイトをリニューアルしました</span>
-      </div>
-      <div class="news-item">
-        <span class="date">2026.07.31</span>
-        <span class="title">デザイン専門メディア「Creative Voice」に掲載されました</span>
-      </div>
-      <div class="news-item">
-        <span class="date">2026.07.16</span>
-        <span class="title">新サービス「UI/UXデザイン監修プラン」を開始しました</span>
-      </div>
+    <div class="sechead"><div class="hd"><span class="eyebrow">Service</span><h2>できること</h2></div><a class="more" href="/service">サービスの詳細</a></div>
+        <div class="sgroup">
+          <div class="gl"><b>デザイン</b><span class="meta-en">Design</span></div>
+          <a class="srow" href="/service#branding"><span class="nm">ブランディング<em>Branding</em></span><span class="ds">本質を見極め、ロゴ・VI・トーン&amp;マナーまで一貫して落とし込みます。名刺や印刷物まで同じ思想で揃えます。</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="srow" href="/service#web"><span class="nm">Webサイト制作<em>Web</em></span><span class="ds">情報設計・UI/UXデザインから実装まで一気通貫で。</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="srow" href="/service#uiux"><span class="nm">UI/UXデザイン<em>UI・UX</em></span><span class="ds">使い心地を、ユーザー視点で磨き上げます。</span><span class="ar" aria-hidden="true">→</span></a>
+        </div>
+        <div class="sgroup">
+          <div class="gl"><b>AI</b><span class="meta-en">AI</span></div>
+          <a class="srow" href="/service/ax"><span class="nm">AX支援<em>AI Transformation</em></span><span class="ds">AIを前提に、日々の業務の流れを組み直します。業務の棚卸しから社内ルールづくり、現場への定着まで伴走します。金沢市のAI・DX補助金を使う場合のご相談にも応じます。</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="srow" href="/service#video"><span class="nm">AI動画クリエイティブ<em>AI Video</em></span><span class="ds">Instagram向けの縦型動画を、必要な本数だけ素早く。広告動画を社内でつくる仕組みづくりにも対応します。</span><span class="ar" aria-hidden="true">→</span></a>
+        </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sechead"><div class="hd"><span class="eyebrow">News</span><h2>お知らせ</h2></div><a class="more" href="/news">すべてのお知らせ</a></div>
+    <div>
+      <div class="nrow simple"><span class="dt">2026.08.18</span><span>コーポレートサイトをリニューアルしました</span></div>
+      <div class="nrow simple"><span class="dt">2026.07.31</span><span>デザイン専門メディア「Creative Voice」に掲載されました</span></div>
+      <div class="nrow simple"><span class="dt">2026.07.16</span><span>新サービス「UI/UXデザイン監修プラン」を開始しました</span></div>
     </div>
   </div>
 </section>
 
 <section class="cta-band">
   <div class="container">
-    <div class="cta-text">ご相談はお気軽に。</div>
-    <a href="/contact" class="btn-pill-white">お問い合わせ →</a>
+    <div><h2 class="big">ご相談はお気軽に。</h2><p class="jp">ブランド、Web、AI活用。まだ形になっていない段階からお話しできます。</p></div>
+    <a href="/contact" class="btn">お問い合わせ <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="footer-cat" aria-hidden="true"><img src="/images/cats/cat-sleeping.png" alt=""></div>
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <a href="/" class="footer-logo"><img src="/images/logo-mark.png" alt=""><img src="/images/logo-wordmark.png" alt="mediom"></a>
-      <p class="footer-tagline">つなぐ瞬間を、デザインする。<br>東京都渋谷区神宮前5-2-2</p>
+  <div class="container">
+    <div class="geo">
+      <span class="place">Based in Kanazawa, Japan</span>
+      <span class="coord">36.5613° N / 136.6562° E</span>
     </div>
-    <nav class="footer-nav" aria-label="フッターナビゲーション">
-      <span class="footer-nav-label">Sitemap</span>
-      <a href="/about">会社概要</a>
-      <a href="/service">サービス</a>
-      <a href="/works">実績</a>
-      <a href="/news">ニュース</a>
-      <a href="/contact">お問い合わせ</a>
+    <nav class="foot-links" aria-label="フッターナビゲーション">
+      <a href="/privacy-policy">Privacy</a>
+      <span>© 2026 mediom</span>
     </nav>
-    <div class="footer-contact">
-      <span class="footer-nav-label">Contact</span>
-      <a href="mailto:hello@mediom.jp">hello@mediom.jp</a>
-      <span>受付時間　平日 10:00〜18:00</span>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <span>© 2026 mediom</span>
-    <a href="/privacy-policy">プライバシーポリシー</a>
   </div>
 </footer>
-
-<script src="/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+<script src="/js/arcs.js?v=20261008"></script>
+<script src="/js/main.js?v=20261008"></script>
 </body>
 </html>

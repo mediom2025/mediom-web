@@ -2,9 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>サービス案内 | mediom</title>
-<meta name="description" content="mediomが提供するブランディング・Webサイト制作・UI/UXデザインのサービス内容と進め方をご紹介します。">
+<meta name="description" content="mediomが提供するブランディング・Webサイト制作・UI/UXデザイン・動画制作と、AIで業務を組み替えるAX支援のご案内です。">
 <link rel="canonical" href="https://mediom-web.vercel.app/service">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
@@ -12,15 +12,18 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="mediom">
 <meta property="og:title" content="サービス案内 | mediom">
-<meta property="og:description" content="mediomが提供するブランディング・Webサイト制作・UI/UXデザインのサービス内容と進め方をご紹介します。">
+<meta property="og:description" content="mediomが提供するブランディング・Webサイト制作・UI/UXデザイン・動画制作と、AIで業務を組み替えるAX支援のご案内です。">
 <meta property="og:url" content="https://mediom-web.vercel.app/service">
 <meta property="og:image" content="https://mediom-web.vercel.app/images/og-default.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="サービス案内 | mediom">
-<meta name="twitter:description" content="mediomが提供するブランディング・Webサイト制作・UI/UXデザインのサービス内容と進め方をご紹介します。">
+<meta name="twitter:description" content="mediomが提供するブランディング・Webサイト制作・UI/UXデザイン・動画制作と、AIで業務を組み替えるAX支援のご案内です。">
 <meta name="twitter:image" content="https://mediom-web.vercel.app/images/og-default.png">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/css/style.css?v=20261008">
 </head>
 <body>
 <div class="site-loader" aria-hidden="true">
@@ -32,152 +35,83 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt=""><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom"></a>
-    <nav class="main-nav" aria-label="グローバルナビゲーション">
-      <ul>
-        <li><a href="/about">会社概要</a></li>
-        <li><a href="/service" aria-current="page">サービス</a></li>
-        <li><a href="/works">実績</a></li>
-        <li><a href="/news">ニュース</a></li>
-      </ul>
-      <a href="/contact" class="btn-pill">お問い合わせ</a>
-    </nav>
-    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt="" width="400" height="205"><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom" width="700" height="112"></a>
+    <nav class="main-nav" aria-label="グローバルナビゲーション"><a href="/about">About</a><a href="/service" aria-current="page">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">Contact</a></nav>
+    <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav"><i></i><i></i></button>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="メニュー" hidden><a href="/about">About</a><a href="/service" aria-current="page">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">お問い合わせ</a></nav>
   </div>
 </header>
-
-<div class="mobile-nav" id="mobile-nav">
-  <button class="close-btn" aria-label="閉じる">×</button>
-  <a href="/about">会社概要</a>
-  <a href="/service">サービス</a>
-  <a href="/works">実績</a>
-  <a href="/news">ニュース</a>
-  <a href="/contact">お問い合わせ</a>
-</div>
 
 <main id="main">
 <section class="page-head">
   <div class="container">
-    <span class="label">Service</span>
-    <h1 class="title">サービス案内</h1>
-    <p class="lead">ブランディングからWebサイト制作、UI/UXデザインまで。企画から実装・運用まで一貫して伴走します。</p>
+    <span class="eyebrow">Service</span>
+    <h1>サービス案内</h1>
+    <p class="lead">デザインとAIの2つの領域で、企画から実装、運用まで一貫して伴走します。</p>
   </div>
 </section>
 
-<section class="section reveal">
-  <div class="container" style="display:flex;flex-direction:column;gap:36px">
-
-    <div id="branding" class="service-detail-row">
-      <div class="figure-slot service-detail-figure"><img src="/images/service-branding.svg" alt="" loading="lazy"></div>
-      <div class="service-detail-copy">
-        <div class="label" style="color:var(--indigo)">01</div>
-        <div class="service-detail-name">ブランディング</div>
-        <p class="detail-text">企業やプロダクトが本来持つ価値を言語化し、ロゴ・VI・トーン&マナーへと一貫して落とし込みます。新規ブランドの立ち上げから、既存ブランドのリニューアルまで対応します。</p>
-      </div>
-    </div>
-
-    <div id="web" class="service-detail-row">
-      <div class="figure-slot service-detail-figure"><img src="/images/service-web.svg" alt="" loading="lazy"></div>
-      <div class="service-detail-copy">
-        <div class="label" style="color:var(--indigo)">02</div>
-        <div class="service-detail-name">Webサイト制作</div>
-        <p class="detail-text">情報設計・UI/UXデザインから実装まで。コーポレートサイトやブランドサイト、採用サイトなど、伝わり、機能するサイトをつくります。</p>
-      </div>
-    </div>
-
-    <div id="uiux" class="service-detail-row">
-      <div class="figure-slot service-detail-figure"><img src="/images/service-uiux.svg" alt="" loading="lazy"></div>
-      <div class="service-detail-copy">
-        <div class="label" style="color:var(--indigo)">03</div>
-        <div class="service-detail-name">UI/UXデザイン</div>
-        <p class="detail-text">プロダクトやサービスの使い心地を、ユーザー視点で磨き上げます。リサーチ、ワイヤーフレーム、UIデザイン、ユーザビリティ検証まで対応します。</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section reveal">
+<section class="section" style="padding-top:8px">
   <div class="container">
-    <div class="section-head">
-      <span class="label">進め方 — 4ステップ</span>
+        <div class="sgroup">
+          <div class="gl"><b>デザイン</b><span class="meta-en">Design</span></div>
+          <a class="srow" href="/service#branding"><span class="nm">ブランディング<em>Branding</em></span><span class="ds">本質を見極め、ロゴ・VI・トーン&amp;マナーまで一貫して落とし込みます。名刺や印刷物まで同じ思想で揃えます。</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="srow" href="/service#web"><span class="nm">Webサイト制作<em>Web</em></span><span class="ds">情報設計・UI/UXデザインから実装まで一気通貫で。</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="srow" href="/service#uiux"><span class="nm">UI/UXデザイン<em>UI・UX</em></span><span class="ds">使い心地を、ユーザー視点で磨き上げます。</span><span class="ar" aria-hidden="true">→</span></a>
+        </div>
+        <div class="sgroup">
+          <div class="gl"><b>AI</b><span class="meta-en">AI</span></div>
+          <a class="srow" href="/service/ax"><span class="nm">AX支援<em>AI Transformation</em></span><span class="ds">AIを前提に、日々の業務の流れを組み直します。業務の棚卸しから社内ルールづくり、現場への定着まで伴走します。金沢市のAI・DX補助金を使う場合のご相談にも応じます。</span><span class="ar" aria-hidden="true">→</span></a>
+          <a class="srow" href="/service#video"><span class="nm">AI動画クリエイティブ<em>AI Video</em></span><span class="ds">Instagram向けの縦型動画を、必要な本数だけ素早く。広告動画を社内でつくる仕組みづくりにも対応します。</span><span class="ar" aria-hidden="true">→</span></a>
+        </div>
+  </div>
+</section>
+
+<section class="section mist">
+  <div class="container">
+    <div class="sechead"><div class="hd"><span class="eyebrow">Design</span><h2>デザインの領域</h2></div></div>
+    <div class="uses">
+      <div id="branding"><b>ブランディング</b><span>企業やプロダクトが本来持つ価値を言語化し、ロゴ・VI・トーン&amp;マナーへと一貫して落とし込みます。新規ブランドの立ち上げから、既存ブランドのリニューアル、名刺などの印刷物まで対応します。</span></div>
+      <div id="web"><b>Webサイト制作</b><span>情報設計・UI/UXデザインから実装まで。コーポレートサイトやブランドサイト、採用サイトなど、伝わり、機能するサイトをつくります。</span></div>
+      <div id="uiux"><b>UI/UXデザイン</b><span>プロダクトやサービスの使い心地を、ユーザー視点で磨き上げます。リサーチ、ワイヤーフレーム、UIデザイン、ユーザビリティ検証まで対応します。</span></div>
+      <div id="video"><b>動画制作</b><span>施工事例やブランドストーリーの動画から、Instagram向けの縦型広告動画まで。AIを使った制作の仕組みづくりにも対応します。</span></div>
     </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sechead"><div class="hd"><span class="eyebrow">Process</span><h2>進め方</h2></div></div>
     <div class="steps">
-      <div class="step"><div class="num">01</div><div class="name">相談</div></div>
-      <div class="step"><div class="num">02</div><div class="name">設計</div></div>
-      <div class="step"><div class="num">03</div><div class="name">制作</div></div>
-      <div class="step"><div class="num">04</div><div class="name">運用</div></div>
+      <div><b>相談</b><p>目的と課題を伺い、どこから手をつけるかを一緒に決めます。</p></div>
+      <div><b>設計</b><p>情報やブランドの軸、業務の流れを整理し、進め方を設計します。</p></div>
+      <div><b>制作</b><p>デザイン・実装・仕組みづくりを、確認を重ねながら進めます。</p></div>
+      <div><b>運用</b><p>公開や導入のあとも、使われ方を見ながら改善を続けます。</p></div>
     </div>
   </div>
 </section>
 
-<section class="section reveal">
+<section class="cta-band">
   <div class="container">
-    <div class="section-head">
-      <span class="label">関連する実績</span>
-    </div>
-    <div class="works-grid cols-4">
-      <a class="work-card" href="/works-detail/aoba" data-work-category="branding">
-        <div class="work-thumb"><img src="/images/works/aoba.svg" alt="Aoba Corporate Site Renewal" loading="lazy" width="800" height="600"></div>
-        <div class="work-meta">
-          <div class="work-title">Aoba Corporate Site Renewal</div>
-          <div class="work-sub">株式会社Aoba／ブランディング</div>
-        </div>
-      </a>
-      <a class="work-card" href="/works-detail/green-kitchen" data-work-category="web">
-        <div class="work-thumb"><img src="/images/works/green-kitchen.svg" alt="Green Kitchen Brand Site" loading="lazy" width="800" height="600"></div>
-        <div class="work-meta">
-          <div class="work-title">Green Kitchen Brand Site</div>
-          <div class="work-sub">Green Kitchen／Webサイト制作</div>
-        </div>
-      </a>
-      <a class="work-card" href="/works-detail/nagomi" data-work-category="uiux">
-        <div class="work-thumb"><img src="/images/works/nagomi.svg" alt="Nagomi Estate App" loading="lazy" width="800" height="600"></div>
-        <div class="work-meta">
-          <div class="work-title">Nagomi Estate App</div>
-          <div class="work-sub">Nagomi不動産／UI/UXデザイン</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="cta-band split">
-  <div class="container">
-    <span class="cta-text">ご相談はお気軽に。</span>
-    <a href="/contact" class="btn-pill-white">お問い合わせ →</a>
+    <div><h2 class="big">ご相談はお気軽に。</h2><p class="jp">ブランド、Web、AI活用。まだ形になっていない段階からお話しできます。</p></div>
+    <a href="/contact" class="btn">お問い合わせ <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="footer-cat" aria-hidden="true"><img src="/images/cats/cat-sleeping.png" alt=""></div>
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <a href="/" class="footer-logo"><img src="/images/logo-mark.png" alt=""><img src="/images/logo-wordmark.png" alt="mediom"></a>
-      <p class="footer-tagline">つなぐ瞬間を、デザインする。<br>東京都渋谷区神宮前5-2-2</p>
+  <div class="container">
+    <div class="geo">
+      <span class="place">Based in Kanazawa, Japan</span>
+      <span class="coord">36.5613° N / 136.6562° E</span>
     </div>
-    <nav class="footer-nav" aria-label="フッターナビゲーション">
-      <span class="footer-nav-label">Sitemap</span>
-      <a href="/about">会社概要</a>
-      <a href="/service">サービス</a>
-      <a href="/works">実績</a>
-      <a href="/news">ニュース</a>
-      <a href="/contact">お問い合わせ</a>
+    <nav class="foot-links" aria-label="フッターナビゲーション">
+      <a href="/privacy-policy">Privacy</a>
+      <span>© 2026 mediom</span>
     </nav>
-    <div class="footer-contact">
-      <span class="footer-nav-label">Contact</span>
-      <a href="mailto:hello@mediom.jp">hello@mediom.jp</a>
-      <span>受付時間　平日 10:00〜18:00</span>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <span>© 2026 mediom</span>
-    <a href="/privacy-policy">プライバシーポリシー</a>
   </div>
 </footer>
-
-<script src="/js/main.js"></script>
+<script src="/js/main.js?v=20261008"></script>
 </body>
 </html>

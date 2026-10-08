@@ -2,9 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>会社概要 | mediom</title>
-<meta name="description" content="mediomの会社概要。私たちが大事にしていること、会社情報をご紹介します。">
+<meta name="description" content="mediomは、人と人、人と社会をつなぐ瞬間をデザインするスタジオです。大事にしていることと会社情報をご紹介します。">
 <link rel="canonical" href="https://mediom-web.vercel.app/about">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
@@ -12,34 +12,18 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="mediom">
 <meta property="og:title" content="会社概要 | mediom">
-<meta property="og:description" content="mediomの会社概要。私たちが大事にしていること、会社情報をご紹介します。">
+<meta property="og:description" content="mediomは、人と人、人と社会をつなぐ瞬間をデザインするスタジオです。大事にしていることと会社情報をご紹介します。">
 <meta property="og:url" content="https://mediom-web.vercel.app/about">
 <meta property="og:image" content="https://mediom-web.vercel.app/images/og-default.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="会社概要 | mediom">
-<meta name="twitter:description" content="mediomの会社概要。私たちが大事にしていること、会社情報をご紹介します。">
+<meta name="twitter:description" content="mediomは、人と人、人と社会をつなぐ瞬間をデザインするスタジオです。大事にしていることと会社情報をご紹介します。">
 <meta name="twitter:image" content="https://mediom-web.vercel.app/images/og-default.png">
-<link rel="stylesheet" href="/css/style.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "mediom",
-  "url": "https://mediom-web.vercel.app",
-  "logo": "https://mediom-web.vercel.app/favicon.png",
-  "description": "mediomは、ブランディング・Webサイト制作・UI/UXデザインを手がけるデザインスタジオです。",
-  "email": "hello@mediom.jp",
-  "foundingDate": "2019-04",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "神宮前5-2-2",
-    "addressLocality": "渋谷区",
-    "addressRegion": "東京都",
-    "addressCountry": "JP"
-  }
-}
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/css/style.css?v=20261008">
 </head>
 <body>
 <div class="site-loader" aria-hidden="true">
@@ -51,124 +35,75 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt=""><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom"></a>
-    <nav class="main-nav" aria-label="グローバルナビゲーション">
-      <ul>
-        <li><a href="/about" aria-current="page">会社概要</a></li>
-        <li><a href="/service">サービス</a></li>
-        <li><a href="/works">実績</a></li>
-        <li><a href="/news">ニュース</a></li>
-      </ul>
-      <a href="/contact" class="btn-pill">お問い合わせ</a>
-    </nav>
-    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt="" width="400" height="205"><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom" width="700" height="112"></a>
+    <nav class="main-nav" aria-label="グローバルナビゲーション"><a href="/about" aria-current="page">About</a><a href="/service">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">Contact</a></nav>
+    <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav"><i></i><i></i></button>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="メニュー" hidden><a href="/about" aria-current="page">About</a><a href="/service">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">お問い合わせ</a></nav>
   </div>
 </header>
-
-<div class="mobile-nav" id="mobile-nav">
-  <button class="close-btn" aria-label="閉じる">×</button>
-  <a href="/about">会社概要</a>
-  <a href="/service">サービス</a>
-  <a href="/works">実績</a>
-  <a href="/news">ニュース</a>
-  <a href="/contact">お問い合わせ</a>
-</div>
 
 <main id="main">
 <section class="page-head">
   <div class="container">
-    <span class="label">About</span>
-    <h1 class="title">つなぐ瞬間を、<br>デザインする。</h1>
-    <p class="lead">mediomは、人と人、人と社会をつなぐ瞬間に、良いデザインを届けるスタジオです。会社としての立ち位置と、私たちが大事にしていることをご紹介します。</p>
-    <figure class="about-mascot">
-      <img src="/images/cats/cat-sitting-up.png" alt="mediomの看板猫" width="317" height="505" loading="lazy">
-      <figcaption>OUR STUDIO CAT</figcaption>
-    </figure>
+    <span class="eyebrow">About</span>
+    <h1>つなぐ瞬間を、デザインする。</h1>
   </div>
 </section>
 
-<section class="section reveal">
+<section class="section" style="padding-top:8px">
   <div class="container">
-    <div class="about-photo" style="aspect-ratio:16/6"><img src="/images/about-studio.svg" alt="mediomのスタジオ" loading="lazy"></div>
-  </div>
-</section>
-
-<section class="section reveal">
-  <div class="container">
-    <div class="section-head">
-      <span class="label">Value — 大事にしている3つのこと</span>
+    <div class="about-top">
+      <div>
+        <h2 class="motto">つくることは、<br>つなぐこと。</h2>
+        <figure class="about-mascot">
+          <img src="/images/cats/cat-sitting-up.png" alt="mediomの看板猫" width="317" height="505" loading="lazy">
+          <figcaption>OUR STUDIO CAT</figcaption>
+        </figure>
+      </div>
+      <p class="lead">mediomは、人と人、人と社会をつなぐ瞬間をデザインするスタジオです。ブランドやWebサイトをつくることと、AIで日々の業務を組み替えること。どちらも、伝わる状態と、回る状態をつくる仕事だと考えています。</p>
     </div>
-    <div class="value-grid">
-      <div class="value-item">
-        <div class="num">01</div>
-        <div class="title">本質を見極める</div>
-        <div class="desc">流行やスタイルより先に、その企業やプロダクトが本来持つ価値は何かを問い直します。</div>
-      </div>
-      <div class="value-item">
-        <div class="num">02</div>
-        <div class="title">使う人に寄り添う</div>
-        <div class="desc">見た目の美しさだけでなく、実際に使う人の体験を起点にデザインを組み立てます。</div>
-      </div>
-      <div class="value-item">
-        <div class="num">03</div>
-        <div class="title">一貫性をつくる</div>
-        <div class="desc">ロゴから接客まで、あらゆる接点で同じ思想が伝わる状態を目指します。</div>
-      </div>
+    <div class="cols">
+      <div><h3>見極める</h3><p>流行やスタイルより先に、その企業やプロダクトが本来持つ価値は何かを問い直します。</p></div>
+      <div><h3>寄り添う</h3><p>見た目の美しさだけでなく、実際に使う人と、現場で働く人の体験を起点に組み立てます。</p></div>
+      <div><h3>続く形にする</h3><p>つくって終わりにせず、運用の手順やAIの仕組みまで含めて、続けられる形に整えます。</p></div>
     </div>
   </div>
 </section>
 
-<section class="section reveal">
+<section class="section mist">
   <div class="container">
-    <div class="section-head">
-      <span class="label">会社情報</span>
-    </div>
+    <div class="sechead"><div class="hd"><span class="eyebrow">Company</span><h2>会社情報</h2></div></div>
     <table class="info-table">
       <tr><th>商号</th><td>株式会社mediom</td></tr>
       <tr><th>設立</th><td>2019年4月</td></tr>
       <tr><th>所在地</th><td>東京都渋谷区神宮前5-2-2</td></tr>
       <tr><th>代表者</th><td>代表取締役　山田 陽子</td></tr>
-      <tr><th>事業内容</th><td>ブランディング／Webサイト制作／UI・UXデザイン／グラフィックデザイン</td></tr>
+      <tr><th>事業内容</th><td>ブランディング／Webサイト制作／UI・UXデザイン／動画制作／AX支援</td></tr>
     </table>
   </div>
 </section>
 
-<section class="cta-band split">
+<section class="cta-band">
   <div class="container">
-    <span class="cta-text">ご相談はお気軽に。</span>
-    <a href="/contact" class="btn-pill-white">お問い合わせ →</a>
+    <div><h2 class="big">ご相談はお気軽に。</h2><p class="jp">ブランド、Web、AI活用。まだ形になっていない段階からお話しできます。</p></div>
+    <a href="/contact" class="btn">お問い合わせ <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
 </main>
 
 <footer class="site-footer">
-  <div class="footer-cat" aria-hidden="true"><img src="/images/cats/cat-sleeping.png" alt=""></div>
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <a href="/" class="footer-logo"><img src="/images/logo-mark.png" alt=""><img src="/images/logo-wordmark.png" alt="mediom"></a>
-      <p class="footer-tagline">つなぐ瞬間を、デザインする。<br>東京都渋谷区神宮前5-2-2</p>
+  <div class="container">
+    <div class="geo">
+      <span class="place">Based in Kanazawa, Japan</span>
+      <span class="coord">36.5613° N / 136.6562° E</span>
     </div>
-    <nav class="footer-nav" aria-label="フッターナビゲーション">
-      <span class="footer-nav-label">Sitemap</span>
-      <a href="/about">会社概要</a>
-      <a href="/service">サービス</a>
-      <a href="/works">実績</a>
-      <a href="/news">ニュース</a>
-      <a href="/contact">お問い合わせ</a>
+    <nav class="foot-links" aria-label="フッターナビゲーション">
+      <a href="/privacy-policy">Privacy</a>
+      <span>© 2026 mediom</span>
     </nav>
-    <div class="footer-contact">
-      <span class="footer-nav-label">Contact</span>
-      <a href="mailto:hello@mediom.jp">hello@mediom.jp</a>
-      <span>受付時間　平日 10:00〜18:00</span>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <span>© 2026 mediom</span>
-    <a href="/privacy-policy">プライバシーポリシー</a>
   </div>
 </footer>
-
-<script src="/js/main.js"></script>
+<script src="/js/main.js?v=20261008"></script>
 </body>
 </html>
