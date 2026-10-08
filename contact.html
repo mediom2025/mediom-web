@@ -2,25 +2,28 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>お問い合わせ | mediom</title>
-<meta name="description" content="mediomへのお問い合わせはこちらから。案件のご相談、採用、取材などお気軽にご連絡ください。">
-<link rel="canonical" href="https://mediom.jp/contact">
+<meta name="description" content="mediomへのお問い合わせ。制作のご相談、AX支援のご相談など、お気軽にご連絡ください。">
+<link rel="canonical" href="https://mediom-web.vercel.app/contact">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="mediom">
 <meta property="og:title" content="お問い合わせ | mediom">
-<meta property="og:description" content="mediomへのお問い合わせはこちらから。案件のご相談、採用、取材などお気軽にご連絡ください。">
-<meta property="og:url" content="https://mediom.jp/contact">
-<meta property="og:image" content="https://mediom.jp/images/og-default.png">
+<meta property="og:description" content="mediomへのお問い合わせ。制作のご相談、AX支援のご相談など、お気軽にご連絡ください。">
+<meta property="og:url" content="https://mediom-web.vercel.app/contact">
+<meta property="og:image" content="https://mediom-web.vercel.app/images/og-default.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="お問い合わせ | mediom">
-<meta name="twitter:description" content="mediomへのお問い合わせはこちらから。案件のご相談、採用、取材などお気軽にご連絡ください。">
-<meta name="twitter:image" content="https://mediom.jp/images/og-default.png">
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:description" content="mediomへのお問い合わせ。制作のご相談、AX支援のご相談など、お気軽にご連絡ください。">
+<meta name="twitter:image" content="https://mediom-web.vercel.app/images/og-default.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/css/style.css?v=20261008b">
 </head>
 <body>
 <div class="site-loader" aria-hidden="true">
@@ -32,73 +35,49 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt=""><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom"></a>
-    <nav class="main-nav" aria-label="グローバルナビゲーション">
-      <ul>
-        <li><a href="/about">会社概要</a></li>
-        <li><a href="/service">サービス</a></li>
-        <li><a href="/works">実績</a></li>
-        <li><a href="/news">ニュース</a></li>
-      </ul>
-      <a href="/contact" class="btn-pill">お問い合わせ</a>
-    </nav>
-    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav">☰</button>
+    <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt="" width="400" height="205"><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom" width="700" height="112"></a>
+    <nav class="main-nav" aria-label="グローバルナビゲーション"><a href="/about">About</a><a href="/service">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">Contact</a></nav>
+    <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav"><i></i><i></i></button>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="メニュー" hidden><a href="/about">About</a><a href="/service">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">お問い合わせ</a></nav>
   </div>
 </header>
-
-<div class="mobile-nav" id="mobile-nav">
-  <button class="close-btn" aria-label="閉じる">×</button>
-  <a href="/about">会社概要</a>
-  <a href="/service">サービス</a>
-  <a href="/works">実績</a>
-  <a href="/news">ニュース</a>
-  <a href="/contact">お問い合わせ</a>
-</div>
 
 <main id="main">
 <section class="page-head">
   <div class="container">
-    <span class="label">Contact</span>
-    <h1 class="title">お問い合わせ</h1>
-    <p class="lead">案件のご相談、採用、取材など幅広く受け付けております。送信後にメールソフトが起動しますので、内容をご確認のうえ送信してください。</p>
+    <span class="eyebrow">Contact</span>
+    <h1>お問い合わせ</h1>
+    <p class="lead">制作やAX支援のご相談、取材など幅広く受け付けております。送信ボタンを押すと、入力内容を差し込んだメールがお使いのメールソフトで作成されます。内容をご確認のうえ、そのまま送信してください。</p>
   </div>
 </section>
 
-<section class="section reveal" style="border-bottom:none">
+<section class="section" style="padding-top:8px">
   <div class="container">
-
-    <form id="contact-form" class="form-grid" novalidate aria-describedby="form-instructions">
-      <p id="form-instructions" class="form-note" style="margin-top:0;padding-top:0;border-top:none">送信ボタンを押すと、入力内容を差し込んだメールがお使いのメールソフトで作成されます。内容をご確認のうえ、そのまま送信してください。</p>
-
+    <form id="contact-form" class="form-grid" novalidate>
       <div class="field">
-        <label>お問い合わせ種別 <span class="req">*</span></label>
-        <div class="radio-group" role="radiogroup">
-          <label class="radio-opt selected">
-            <input type="radio" name="type" value="project" checked>
-            案件のご相談
-          </label>
-          <label class="radio-opt">
-            <input type="radio" name="type" value="other">
-            その他
-          </label>
+        <span class="lbl" id="type-label">お問い合わせ種別 <span class="req">*</span></span>
+        <div class="radio-group" role="radiogroup" aria-labelledby="type-label">
+          <label class="radio-opt selected"><input type="radio" name="type" value="project" checked>制作のご相談</label>
+          <label class="radio-opt"><input type="radio" name="type" value="ax">AX支援のご相談</label>
+          <label class="radio-opt"><input type="radio" name="type" value="other">その他</label>
         </div>
       </div>
 
       <div class="field">
         <label for="company">会社名 <span class="req">*</span></label>
-        <input type="text" id="company" name="company" required aria-describedby="err-company">
+        <input type="text" id="company" name="company" required aria-describedby="err-company" autocomplete="organization">
         <div class="error-msg" id="err-company" role="alert">会社名を入力してください</div>
       </div>
 
       <div class="field-row">
         <div class="field">
           <label for="name">お名前 <span class="req">*</span></label>
-          <input type="text" id="name" name="name" required aria-describedby="err-name">
+          <input type="text" id="name" name="name" required aria-describedby="err-name" autocomplete="name">
           <div class="error-msg" id="err-name" role="alert">お名前を入力してください</div>
         </div>
         <div class="field">
           <label for="email">メール <span class="req">*</span></label>
-          <input type="email" id="email" name="email" required aria-describedby="err-email">
+          <input type="email" id="email" name="email" required aria-describedby="err-email" autocomplete="email">
           <div class="error-msg" id="err-email" role="alert">正しいメールアドレスを入力してください</div>
         </div>
       </div>
@@ -121,15 +100,13 @@
         <div class="error-msg" id="err-message" role="alert">ご相談内容を入力してください</div>
       </div>
 
-      <div class="checkbox-field field">
+      <div class="field checkbox-field">
         <input type="checkbox" id="agree" name="agree" required aria-describedby="err-agree">
-        <label for="agree"><a href="/privacy-policy" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline">プライバシーポリシー</a>に同意します <span class="req">*</span></label>
+        <label for="agree"><a href="/privacy-policy" target="_blank" rel="noopener">プライバシーポリシー</a>に同意します <span class="req">*</span></label>
         <div class="error-msg" id="err-agree" role="alert">プライバシーポリシーへの同意が必要です</div>
       </div>
 
-      <div class="form-submit">
-        <button type="submit" class="btn-pill">メールを作成する</button>
-      </div>
+      <button type="submit" class="btn-submit">メールを作成する</button>
     </form>
 
     <div id="form-thanks" class="thanks-box" hidden>
@@ -138,41 +115,22 @@
       <p>作成されたメールの内容をご確認のうえ、そのまま送信してください。メールが開かない場合は、お手数ですが hello@mediom.jp まで直接ご連絡ください。</p>
     </div>
 
-    <div class="form-note">
-      Email：hello@mediom.jp　／　所在地：東京都渋谷区神宮前5-2-2　／　受付時間：平日 10:00〜18:00
-    </div>
+    <p class="contact-info">Email：hello@mediom.jp　／　受付時間：平日 10:00〜18:00</p>
   </div>
 </section>
-
 </main>
 
 <footer class="site-footer">
-  <div class="footer-cat" aria-hidden="true"><img src="/images/cats/cat-sleeping.png" alt=""></div>
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <a href="/" class="footer-logo"><img src="/images/logo-mark.png" alt=""><img src="/images/logo-wordmark.png" alt="mediom"></a>
-      <p class="footer-tagline">つなぐ瞬間を、デザインする。<br>東京都渋谷区神宮前5-2-2</p>
+  <div class="container">
+    <div class="geo">
+      <span class="place">Based in Kanazawa, Japan</span>
     </div>
-    <nav class="footer-nav" aria-label="フッターナビゲーション">
-      <span class="footer-nav-label">Sitemap</span>
-      <a href="/about">会社概要</a>
-      <a href="/service">サービス</a>
-      <a href="/works">実績</a>
-      <a href="/news">ニュース</a>
-      <a href="/contact">お問い合わせ</a>
+    <nav class="foot-links" aria-label="フッターナビゲーション">
+      <a href="/privacy-policy">Privacy</a>
+      <span>© 2026 mediom</span>
     </nav>
-    <div class="footer-contact">
-      <span class="footer-nav-label">Contact</span>
-      <a href="mailto:hello@mediom.jp">hello@mediom.jp</a>
-      <span>受付時間　平日 10:00〜18:00</span>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <span>© 2026 mediom</span>
-    <a href="/privacy-policy">プライバシーポリシー</a>
   </div>
 </footer>
-
-<script src="/js/main.js"></script>
+<script src="/js/main.js?v=20261008b"></script>
 </body>
 </html>

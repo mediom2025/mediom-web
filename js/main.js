@@ -6,12 +6,15 @@
      so browsing the site doesn't feel like reloading an app each click */
   const loader = document.querySelector('.site-loader');
   if (!loader) return;
-  const alreadyVisited = sessionStorage.getItem('mediom-visited');
+  let alreadyVisited = false;
+  try {
+    alreadyVisited = !!sessionStorage.getItem('mediom-visited');
+    sessionStorage.setItem('mediom-visited', '1');
+  } catch (e) { /* storage blocked: just play the loader */ }
   if (alreadyVisited) {
     loader.classList.add('is-skipped');
     return;
   }
-  sessionStorage.setItem('mediom-visited', '1');
   const MIN_DISPLAY_MS = 700;
   const shown = Date.now();
   const hide = () => {
@@ -31,151 +34,129 @@
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  /* mobile nav toggle */
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* mobile menu: the header button opens a panel under the sticky bar */
   const toggle = document.querySelector('.nav-toggle');
-  const mobileNav = document.querySelector('.mobile-nav');
+  const mobileNav = document.getElementById('mobile-nav');
   if (toggle && mobileNav) {
-    const closeBtn = mobileNav.querySelector('.close-btn');
-    const openNav = () => {
-      mobileNav.classList.add('open');
-      toggle.setAttribute('aria-expanded', 'true');
+    const setOpen = (open) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      mobileNav.hidden = !open;
     };
-    const closeNav = () => {
-      mobileNav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    };
-    toggle.addEventListener('click', openNav);
-    closeBtn && closeBtn.addEventListener('click', closeNav);
-    mobileNav.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', closeNav)
-    );
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
   }
 
-  /* interactive hero lines — a gentle cursor-parallax on the two hero
-     background curves, plus a soft antique-gold glow and short green
-     trail that follow the pointer (idly drifting when it's not over the
-     hero). Only present on the homepage; respects reduced-motion. */
-  const hero = document.querySelector('.hero');
-  const heroLine1 = document.getElementById('hero-line1');
-  const heroLine2 = document.getElementById('hero-line2');
-  const heroTrailG = document.getElementById('hero-trail');
-  const heroGlow = document.getElementById('hero-cursor-glow');
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (hero && heroLine1 && heroLine2 && heroTrailG && heroGlow && !prefersReducedMotion) {
-    const TRAIL_LEN = 9;
-    const trailDots = [];
-    const trailHistory = [];
-    for (let i = 0; i < TRAIL_LEN; i++) {
-      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      dot.setAttribute('class', 'hero-trail-dot');
-      dot.setAttribute('r', 0);
-      dot.style.opacity = 0;
-      heroTrailG.appendChild(dot);
-      trailDots.push(dot);
-      trailHistory.push({ x: 720, y: 400 });
-    }
-
-    let rect = hero.getBoundingClientRect();
-    const updateRect = () => { rect = hero.getBoundingClientRect(); };
-    window.addEventListener('resize', updateRect);
-
-    const toViewBox = (clientX, clientY) => ({
-      x: (clientX - rect.left) / rect.width * 1440,
-      y: (clientY - rect.top) / rect.height * 800,
-    });
-
-    let hasPointer = false;
-    let target = { x: 720, y: 400 };
-    hero.addEventListener('pointermove', (e) => {
-      hasPointer = true;
-      target = toViewBox(e.clientX, e.clientY);
-    });
-    hero.addEventListener('pointerleave', () => { hasPointer = false; });
-
-    let t = 0;
-    const idleTarget = () => {
-      t += 0.006;
-      return { x: 720 + Math.sin(t) * 260, y: 400 + Math.cos(t * 0.72) * 168 };
-    };
-
-    const lerp = (a, b, n) => a + (b - a) * n;
-    const pointer = { x: 720, y: 400 };
-    let prevPointer = { x: 720, y: 400 };
-
-    const frame = () => {
-      const idle = idleTarget();
-      pointer.x = lerp(pointer.x, hasPointer ? target.x : idle.x, 0.07);
-      pointer.y = lerp(pointer.y, hasPointer ? target.y : idle.y, 0.07);
-      const speed = Math.hypot(pointer.x - prevPointer.x, pointer.y - prevPointer.y);
-      prevPointer = { x: pointer.x, y: pointer.y };
-
-      trailHistory.unshift({ x: pointer.x, y: pointer.y });
-      trailHistory.length = TRAIL_LEN;
-      trailDots.forEach((dot, i) => {
-        const p = trailHistory[i];
-        const frac = 1 - i / TRAIL_LEN;
-        dot.setAttribute('cx', p.x);
-        dot.setAttribute('cy', p.y);
-        dot.setAttribute('r', Math.max(0, frac * 4.2));
-        dot.style.opacity = frac * 0.36;
-      });
-      heroGlow.setAttribute('cx', pointer.x);
-      heroGlow.setAttribute('cy', pointer.y);
-      const boost = Math.min(1, speed / 30);
-      heroGlow.setAttribute('r', 64 + boost * 46);
-      heroGlow.style.opacity = 0.4 + boost * 0.26;
-
-      // translate only — no rotation, keeps the motion soft and calm
-      const dx = (pointer.x - 720) / 720;
-      const dy = (pointer.y - 400) / 400;
-      heroLine1.setAttribute('transform', `translate(${dx * 46},${dy * 32})`);
-      heroLine2.setAttribute('transform', `translate(${dx * -78},${dy * -56})`);
-
-      requestAnimationFrame(frame);
-    };
-
-    updateRect();
-    requestAnimationFrame(frame);
-  }
-
-  /* scroll reveal */
-  const revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && revealEls.length) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
-  } else {
-    revealEls.forEach(el => el.classList.add('is-visible'));
-  }
-
-  /* generic chip-filter: wires up any [data-*-chips] row of .chip elements
-     against sibling items carrying the matching data-*-category attribute */
-  function initChipFilter(rowSelector, itemSelector, categoryProp) {
-    const row = document.querySelector(rowSelector);
-    if (!row) return;
+  /* chip filter: items carry a space-separated list of categories,
+     e.g. data-category="web branding" */
+  document.querySelectorAll('[data-filter-chips]').forEach(row => {
+    const scope = row.closest('section') || document;
     const chips = row.querySelectorAll('.chip');
-    const items = document.querySelectorAll(itemSelector);
+    const items = scope.querySelectorAll('[data-category]');
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
+        chips.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
         chip.classList.add('active');
+        chip.setAttribute('aria-pressed', 'true');
         const cat = chip.dataset.filter;
         items.forEach(item => {
-          const show = cat === 'all' || item.dataset[categoryProp] === cat;
-          item.style.display = show ? '' : 'none';
+          item.hidden = !(cat === 'all' || item.dataset.category.split(' ').includes(cat));
+        });
+        // keep the left/right alternation readable after filtering
+        let n = 0;
+        items.forEach(item => {
+          if (item.hidden || !item.classList.contains('wk')) return;
+          item.classList.toggle('rev', n % 2 === 1);
+          n++;
         });
       });
     });
-  }
-  initChipFilter('[data-filter-chips]', '[data-work-category]', 'workCategory');
-  initChipFilter('[data-news-chips]', '[data-news-category]', 'newsCategory');
+  });
+
+  /* live samples on the works rows */
+  const sleep = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+  document.querySelectorAll('.demo-fit').forEach(fit => {
+    const inner = fit.firstElementChild;
+    const scale = () => { inner.style.transform = 'scale(' + (fit.clientWidth / 640) + ')'; };
+    scale();
+    if ('ResizeObserver' in window) new ResizeObserver(scale).observe(fit);
+  });
+  const NOTES = [
+    '需要と競合を3つの軸で\n整理しています…\n候補は2案に絞れそう',
+    '必要な手続きと表示を\n確認しています…\n要確認：2件',
+    '配送手段を3案で比較…\n費用・日数・補償の表',
+    '損益を3つのシナリオで\n試算しています…\n前提は一覧に',
+    '紹介文の案を2本…\n現地の言い回しに直す',
+    '小さく試す計画…\n予算と撤退基準を付ける'
+  ];
+  const type = async (el, text) => {
+    if (reduce) { el.textContent = text; return; }
+    el.textContent = '';
+    for (const ch of text) { el.textContent += ch; await sleep(18); }
+  };
+  const runOffice = async (root) => {
+    const ph = [...root.querySelectorAll('.do-ph li')];
+    const desks = [...root.querySelectorAll('.do-desk')];
+    const avs = [...root.querySelectorAll('.do-av')];
+    const seals = [...root.querySelectorAll('.do-seals span')];
+    const memo = root.querySelector('.do-memo');
+    const setPh = i => ph.forEach((li, k) => { li.className = k < i ? 'past' : k === i ? 'now' : ''; });
+    desks.forEach(d => { d.className = 'do-desk'; d.querySelector('.do-paper').textContent = ''; d.querySelector('.do-lamp').textContent = '待機'; });
+    seals.forEach(x => x.classList.remove('on'));
+    memo.classList.remove('on');
+    avs.forEach(a => a.classList.remove('busy'));
+    setPh(0); await sleep(500);
+    setPh(1); avs[0].classList.add('busy'); await sleep(700); avs[0].classList.remove('busy');
+    setPh(2);
+    await Promise.all(desks.map(async (d, i) => {
+      await sleep(i * 160);
+      d.classList.add('on'); avs[i + 1].classList.add('busy'); d.querySelector('.do-lamp').textContent = '執筆中';
+      await type(d.querySelector('.do-paper'), NOTES[i]);
+      d.classList.remove('on'); d.classList.add('done'); avs[i + 1].classList.remove('busy'); d.querySelector('.do-lamp').textContent = '提出済み';
+    }));
+    setPh(3);
+    for (const x of seals) { await sleep(380); x.classList.add('on'); }
+    await sleep(400); setPh(4); avs[0].classList.add('busy');
+    await sleep(700); memo.classList.add('on'); avs[0].classList.remove('busy');
+    setPh(5);
+  };
+  const runReel = async (root) => {
+    const scenes = [...root.querySelectorAll('.scene')];
+    const bar = root.querySelector('.rs-bar i');
+    const stage = root.querySelector('.rs-stage');
+    const caption = root.querySelector('.rs-cap');
+    const setScene = (k, text) => { stage.className = 'rs-stage s' + k; caption.textContent = text; };
+    // generate: photo -> copy -> closing card
+    bar.style.width = '0';
+    scenes.forEach(s => s.classList.remove('on', 'ok'));
+    root.classList.add('running');
+    for (let i = 0; i < scenes.length; i++) {
+      scenes[i].classList.add('on');
+      bar.style.width = ((i + 0.5) / scenes.length * 100) + '%';
+      await sleep(800);
+      scenes[i].classList.remove('on');
+      scenes[i].classList.add('ok');
+      bar.style.width = ((i + 1) / scenes.length * 100) + '%';
+    }
+    await sleep(300);
+    root.classList.remove('running');
+    // play the finished ad
+    const cuts = [[1, '新作、入荷しました'], [2, '素材と手触りに\nこだわった一品'], [3, 'プロフィールの\nリンクからどうぞ']];
+    for (const [k, text] of cuts) { setScene(k, text); await sleep(1800); }
+    setScene(1, '新作、入荷しました');
+  };
+  document.querySelectorAll('.demo-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const root = document.getElementById(btn.dataset.target);
+      if (!root) return;
+      btn.disabled = true;
+      try { await (btn.dataset.demo === 'office' ? runOffice(root) : runReel(root)); }
+      finally { btn.disabled = false; btn.firstChild.textContent = 'もう一度動かす '; }
+    });
+  });
 
   /* contact form radio pills */
   document.querySelectorAll('.radio-group').forEach(group => {
@@ -202,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let firstInvalid = null;
 
       form.querySelectorAll('[required]').forEach(field => {
-        const wrapper = field.closest('.field') || field.closest('.checkbox-field');
+        const wrapper = field.closest('.field');
         let filled;
         if (field.type === 'checkbox') {
           filled = field.checked;
@@ -228,7 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const get = (name) => (form.elements[name] ? form.elements[name].value.trim() : '');
-      const typeLabel = get('type') === 'other' ? 'その他' : '案件のご相談';
+      const typeLabels = { project: '制作のご相談', ax: 'AX支援のご相談', other: 'その他' };
+      const typeLabel = typeLabels[get('type')] || 'その他';
       const budgetMap = {
         '~100': '〜100万円', '100-300': '100〜300万円', '300-500': '300〜500万円',
         '500+': '500万円〜', 'undecided': '未定', '': '未選択',
@@ -249,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
       form.hidden = true;
       const thanks = document.querySelector('#form-thanks');
       if (thanks) thanks.hidden = false;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
       window.location.href = mailto;
     });
   }
