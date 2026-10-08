@@ -126,25 +126,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const runReel = async (root) => {
     const scenes = [...root.querySelectorAll('.scene')];
     const bar = root.querySelector('.rs-bar i');
-    const play = root.querySelector('.rs-play');
-    const caption = play.querySelector('b');
-    play.classList.remove('on');
+    const stage = root.querySelector('.rs-stage');
+    const caption = root.querySelector('.rs-cap');
+    const setScene = (k, text) => { stage.className = 'rs-stage s' + k; caption.textContent = text; };
+    // generate: photo -> copy -> closing card
     bar.style.width = '0';
     scenes.forEach(s => s.classList.remove('on', 'ok'));
     root.classList.add('running');
     for (let i = 0; i < scenes.length; i++) {
       scenes[i].classList.add('on');
       bar.style.width = ((i + 0.5) / scenes.length * 100) + '%';
-      await sleep(900);
+      await sleep(800);
       scenes[i].classList.remove('on');
       scenes[i].classList.add('ok');
       bar.style.width = ((i + 1) / scenes.length * 100) + '%';
     }
-    root.classList.remove('running');
     await sleep(300);
-    play.classList.add('on');
-    const lines = ['新作、入荷しました', '素材と手触りに\nこだわった一品', 'プロフィールの\nリンクからどうぞ'];
-    for (const l of lines) { caption.textContent = l; await sleep(1200); }
+    root.classList.remove('running');
+    // play the finished ad
+    const cuts = [[1, '新作、入荷しました'], [2, '素材と手触りに\nこだわった一品'], [3, 'プロフィールの\nリンクからどうぞ']];
+    for (const [k, text] of cuts) { setScene(k, text); await sleep(1800); }
+    setScene(1, '新作、入荷しました');
   };
   document.querySelectorAll('.demo-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
