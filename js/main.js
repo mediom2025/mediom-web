@@ -123,37 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
     await sleep(700); memo.classList.add('on'); avs[0].classList.remove('busy');
     setPh(5);
   };
-  const runReel = async (root) => {
-    const scenes = [...root.querySelectorAll('.scene')];
-    const bar = root.querySelector('.rs-bar i');
-    const stage = root.querySelector('.rs-stage');
-    const caption = root.querySelector('.rs-cap');
-    const setScene = (k, text) => { stage.className = 'rs-stage s' + k; caption.textContent = text; };
-    // generate: photo -> copy -> closing card
-    bar.style.width = '0';
-    scenes.forEach(s => s.classList.remove('on', 'ok'));
-    root.classList.add('running');
-    for (let i = 0; i < scenes.length; i++) {
-      scenes[i].classList.add('on');
-      bar.style.width = ((i + 0.5) / scenes.length * 100) + '%';
-      await sleep(800);
-      scenes[i].classList.remove('on');
-      scenes[i].classList.add('ok');
-      bar.style.width = ((i + 1) / scenes.length * 100) + '%';
-    }
-    await sleep(300);
-    root.classList.remove('running');
-    // play the finished ad
-    const cuts = [[1, '新作、入荷しました'], [2, '素材と手触りに\nこだわった一品'], [3, 'プロフィールの\nリンクからどうぞ']];
-    for (const [k, text] of cuts) { setScene(k, text); await sleep(1800); }
-    setScene(1, '新作、入荷しました');
-  };
   document.querySelectorAll('.demo-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
       const root = document.getElementById(btn.dataset.target);
       if (!root) return;
       btn.disabled = true;
-      try { await (btn.dataset.demo === 'office' ? runOffice(root) : runReel(root)); }
+      try { await runOffice(root); }
       finally { btn.disabled = false; btn.firstChild.textContent = 'もう一度動かす '; }
     });
   });
