@@ -53,9 +53,11 @@ p{margin:0}
   border-bottom:1px solid var(--line);
 }
 .site-header .container{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:16px;position:relative}
-.logo{display:flex;align-items:center;gap:9px}
-.logo .logo-mark{height:15px;width:auto}
-.logo .logo-word{height:15px;width:auto}
+.logo{display:flex;align-items:flex-end;gap:12px}
+/* logo-mark.png and logo-wordmark.png carry empty space around the artwork;
+   negative margins crop it so the arches and the word sit on one baseline */
+.logo .logo-mark{height:40px;width:auto;margin:-17px -20px -1px -23px}
+.logo .logo-word{height:22px;width:auto;margin:0 -23px -2px -18px}
 .main-nav{display:flex;align-items:center;gap:26px;font-family:var(--en);font-size:12.5px;color:var(--ink-soft)}
 .main-nav a:hover,.main-nav a[aria-current="page"]{color:var(--green)}
 .main-nav .cta{color:var(--paper);background:var(--green);border-radius:99px;padding:6px 16px}
@@ -300,9 +302,7 @@ p{margin:0}
 .info-table th,.info-table td{text-align:left;padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .info-table tr:first-child th,.info-table tr:first-child td{border-top:1px solid var(--line)}
 .info-table th{width:160px;font-weight:500;color:var(--ink-soft)}
-.about-mascot{display:flex;align-items:flex-end;gap:14px;width:max-content;margin:28px 0 0}
-.about-mascot img{width:80px;height:auto;opacity:.92;animation:catBreathe 4s ease-in-out infinite;transform-origin:bottom center}
-.about-mascot figcaption{padding-bottom:8px;font-family:var(--en);font-size:11px;color:var(--ink-faint);letter-spacing:.06em}
+.about-mascot{display:block;width:80px;height:auto;margin-top:28px;opacity:.92;animation:catBreathe 4s ease-in-out infinite;transform-origin:bottom center}
 @keyframes catBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 
 /* ---------- long text (privacy) ---------- */
@@ -340,20 +340,19 @@ p{margin:0}
 .thanks-box h2{font-size:17px;margin:8px 0}
 .thanks-box p{font-size:13.5px;color:var(--ink-soft)}
 
-/* ---------- intro loader ---------- */
-.site-loader{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:var(--paper);transition:opacity .5s ease}
-.site-loader .loader-cat{width:96px}
-.site-loader .loader-cat img{width:100%;height:auto;display:block;animation:catTrot .4s ease-in-out infinite;transform-origin:50% 100%}
-.site-loader .loader-word{height:20px}
-.site-loader .loader-word img{height:100%;width:auto;display:block}
-.site-loader .loader-track{width:120px;height:1px;background:var(--line);overflow:hidden}
-.site-loader .loader-track::after{content:'';display:block;width:40%;height:100%;background:var(--green);animation:loaderTrack 1.1s ease-in-out infinite}
+/* ---------- intro loader: logo first, a small cat crosses the line ---------- */
+.site-loader{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:var(--paper);transition:opacity .35s ease}
+.loader-logo{display:flex;align-items:flex-end;gap:14px}
+.loader-logo .loader-mark{height:62px;width:auto;margin:-26px -30px -2px -35px}
+.loader-logo .loader-word{height:31px;width:auto;margin:0 -33px -2px -26px}
+.loader-track{position:relative;width:132px;height:1px;background:var(--line)}
+.loader-track .loader-cat{position:absolute;left:0;bottom:1px;width:30px;height:auto;animation:catTrot .4s ease-in-out infinite,catCross 1.2s ease-in-out infinite;transform-origin:50% 100%}
 .site-loader.is-hidden{opacity:0;pointer-events:none}
 .site-loader.is-skipped{display:none}
-@keyframes catTrot{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-4px) rotate(-2deg)}50%{transform:translateY(-1px) rotate(0deg)}75%{transform:translateY(-4px) rotate(2deg)}}
-@keyframes loaderTrack{0%{transform:translateX(-120%)}100%{transform:translateX(340%)}}
+@keyframes catTrot{0%,100%{translate:0 0}50%{translate:0 -2px}}
+@keyframes catCross{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:calc(100% - 30px);opacity:0}}
 @media(prefers-reduced-motion:reduce){
-  .site-loader .loader-cat img,.site-loader .loader-track::after,.about-mascot img,.rs-steam path{animation:none!important}
+  .loader-track .loader-cat,.about-mascot,.rs-steam path{animation:none!important}
   .rs-photo{transition:none}
 }
 

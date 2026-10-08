@@ -15,21 +15,21 @@
     loader.classList.add('is-skipped');
     return;
   }
-  const MIN_DISPLAY_MS = 700;
+  const MIN_DISPLAY_MS = 400;
   const shown = Date.now();
   const hide = () => {
     const elapsed = Date.now() - shown;
     const wait = Math.max(0, MIN_DISPLAY_MS - elapsed);
     setTimeout(() => {
       loader.classList.add('is-hidden');
-      setTimeout(() => loader.classList.add('is-skipped'), 550);
+      setTimeout(() => loader.classList.add('is-skipped'), 400);
     }, wait);
   };
   if (document.readyState === 'complete') {
     hide();
   } else {
     window.addEventListener('load', hide);
-    setTimeout(hide, 2200); // safety fallback if load never fires
+    setTimeout(hide, 1500); // safety fallback if load never fires
   }
 })();
 
