@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>お問い合わせ | mediom</title>
 <meta name="description" content="mediomへのお問い合わせ。制作のご相談、AX支援のご相談など、お気軽にご連絡ください。">
-<link rel="canonical" href="https://mediom-web.vercel.app/contact">
+<link rel="canonical" href="https://www.mediom.biz/contact">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
@@ -13,17 +13,17 @@
 <meta property="og:site_name" content="mediom">
 <meta property="og:title" content="お問い合わせ | mediom">
 <meta property="og:description" content="mediomへのお問い合わせ。制作のご相談、AX支援のご相談など、お気軽にご連絡ください。">
-<meta property="og:url" content="https://mediom-web.vercel.app/contact">
-<meta property="og:image" content="https://mediom-web.vercel.app/images/og-default.png">
+<meta property="og:url" content="https://www.mediom.biz/contact">
+<meta property="og:image" content="https://www.mediom.biz/images/og-default.png">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="お問い合わせ | mediom">
 <meta name="twitter:description" content="mediomへのお問い合わせ。制作のご相談、AX支援のご相談など、お気軽にご連絡ください。">
-<meta name="twitter:image" content="https://mediom-web.vercel.app/images/og-default.png">
+<meta name="twitter:image" content="https://www.mediom.biz/images/og-default.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/css/style.css?v=20261008f">
+<link rel="stylesheet" href="/css/style.css?v=20261009c">
 </head>
 <body>
 <div class="site-loader" aria-hidden="true">
@@ -35,28 +35,31 @@
 <header class="site-header">
   <div class="container">
     <a href="/" class="logo"><img class="logo-mark" src="/images/logo-mark.png" alt="" width="400" height="205"><img class="logo-word" src="/images/logo-wordmark.png" alt="mediom" width="700" height="112"></a>
-    <nav class="main-nav" aria-label="グローバルナビゲーション"><a href="/about">About</a><a href="/service">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">Contact</a></nav>
+    <nav class="main-nav" aria-label="グローバルナビゲーション"><a href="/service">サービス</a><a href="/works">実績</a><a href="/about">mediomについて</a><a href="/news">お知らせ</a><a href="/contact" class="cta">お問い合わせ</a></nav>
     <button class="nav-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-nav"><i></i><i></i></button>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="メニュー" hidden><a href="/about">About</a><a href="/service">Service</a><a href="/works">Works</a><a href="/news">News</a><a href="/contact" class="cta">お問い合わせ</a></nav>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="メニュー" hidden><a href="/service">サービス</a><a href="/works">実績</a><a href="/about">mediomについて</a><a href="/news">お知らせ</a><a href="/contact" class="cta">お問い合わせ</a></nav>
   </div>
 </header>
 
 <main id="main">
 <section class="page-head">
   <div class="container">
+    <nav class="crumbs" aria-label="パンくずリスト"><a href="/">ホーム</a><span aria-hidden="true">/</span><span aria-current="page">お問い合わせ</span></nav>
     <span class="eyebrow">Contact</span>
     <h1>お問い合わせ</h1>
-    <p class="lead">制作やAX支援のご相談、取材など幅広く受け付けております。送信ボタンを押すと、入力内容を差し込んだメールがお使いのメールソフトで作成されます。内容をご確認のうえ、そのまま送信してください。</p>
+    <p class="lead">制作やAX支援のご相談、取材など幅広く受け付けております。内容を確認のうえ、担当者よりご連絡します。</p>
   </div>
 </section>
 
 <section class="section" style="padding-top:8px">
   <div class="container">
     <form id="contact-form" class="form-grid" novalidate>
+      <!-- spam trap: hidden from people, bots tend to fill it -->
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field">
         <span class="lbl" id="type-label">お問い合わせ種別 <span class="req">*</span></span>
         <div class="radio-group" role="radiogroup" aria-labelledby="type-label">
-          <label class="radio-opt selected"><input type="radio" name="type" value="project" checked>制作のご相談</label>
+          <label class="radio-opt"><input type="radio" name="type" value="project" checked>制作のご相談</label>
           <label class="radio-opt"><input type="radio" name="type" value="ax">AX支援のご相談</label>
           <label class="radio-opt"><input type="radio" name="type" value="other">その他</label>
         </div>
@@ -105,31 +108,36 @@
         <div class="error-msg" id="err-agree" role="alert">プライバシーポリシーへの同意が必要です</div>
       </div>
 
-      <button type="submit" class="btn-submit">メールを作成する</button>
+      <div class="form-error" id="form-error" role="alert" tabindex="-1" hidden>送信できませんでした。時間をおいて再度お試しいただくか、<a href="mailto:info@mediom.biz">info@mediom.biz</a> まで直接ご連絡ください。</div>
+      <button type="submit" class="btn-submit">送信する</button>
     </form>
 
     <div id="form-thanks" class="thanks-box" hidden>
       <span class="eyebrow">Thank you</span>
-      <h2>メールソフトが開きます</h2>
-      <p>作成されたメールの内容をご確認のうえ、そのまま送信してください。メールが開かない場合は、お手数ですが hello@mediom.jp まで直接ご連絡ください。</p>
+      <h2>送信しました</h2>
+      <p>お問い合わせありがとうございます。内容を確認のうえ、担当者よりご連絡します。</p>
     </div>
 
-    <p class="contact-info">Email：hello@mediom.jp　／　受付時間：平日 10:00〜18:00</p>
+    <p class="contact-info">Email：<a href="mailto:info@mediom.biz">info@mediom.biz</a>　／　受付時間：平日 10:00〜18:00</p>
   </div>
 </section>
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <div class="geo">
-      <span class="place">Based in Kanazawa, Japan</span>
+    <div class="foot-top">
+      <div class="geo">
+        <a href="/" class="foot-logo"><img src="/images/logo-wordmark.png" alt="mediom" width="700" height="112"></a>
+        <span class="place">Based in Kanazawa, Japan</span>
+      </div>
+      <nav class="foot-nav" aria-label="フッターナビゲーション"><a href="/service">サービス</a><a href="/works">実績</a><a href="/about">mediomについて</a><a href="/news">お知らせ</a><a href="/contact">お問い合わせ</a></nav>
     </div>
-    <nav class="foot-links" aria-label="フッターナビゲーション">
-      <a href="/privacy-policy">Privacy</a>
+    <div class="foot-bottom">
+      <a href="/privacy-policy">プライバシーポリシー</a>
       <span>© 2026 mediom</span>
-    </nav>
+    </div>
   </div>
 </footer>
-<script src="/js/main.js?v=20261008f"></script>
+<script src="/js/main.js?v=20261009c"></script>
 </body>
 </html>

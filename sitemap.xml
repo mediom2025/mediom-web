@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://mediom-web.vercel.app/</loc></url>
-  <url><loc>https://mediom-web.vercel.app/about</loc></url>
-  <url><loc>https://mediom-web.vercel.app/service</loc></url>
-  <url><loc>https://mediom-web.vercel.app/service/ax</loc></url>
-  <url><loc>https://mediom-web.vercel.app/works</loc></url>
-  <url><loc>https://mediom-web.vercel.app/news</loc></url>
-  <url><loc>https://mediom-web.vercel.app/contact</loc></url>
-  <url><loc>https://mediom-web.vercel.app/privacy-policy</loc></url>
+  <url><loc>https://www.mediom.biz/</loc></url>
+  <url><loc>https://www.mediom.biz/about</loc></url>
+  <url><loc>https://www.mediom.biz/service</loc></url>
+  <url><loc>https://www.mediom.biz/service/ax</loc></url>
+  <url><loc>https://www.mediom.biz/works</loc></url>
+  <url><loc>https://www.mediom.biz/news</loc></url>
+  <url><loc>https://www.mediom.biz/contact</loc></url>
+  <url><loc>https://www.mediom.biz/privacy-policy</loc></url>
 </urlset>

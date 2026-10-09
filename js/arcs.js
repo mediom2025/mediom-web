@@ -176,7 +176,11 @@ class ArcField {
       field.step(0);
       // advance a little so the first frame already shows links
       for (let i = 0; i < 90; i++) field.step(1 / 60);
-      if (reduce) p.noLoop();
+      if (reduce) { p.noLoop(); return; }
+      // stop drawing while the hero is scrolled out of view
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => { e.isIntersecting ? p.loop() : p.noLoop(); }).observe(host);
+      }
     };
     p.draw = function () {
       p.clear();

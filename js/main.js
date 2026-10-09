@@ -25,11 +25,11 @@
       setTimeout(() => loader.classList.add('is-skipped'), 400);
     }, wait);
   };
-  if (document.readyState === 'complete') {
+  // wait for the DOM, not every image: the loader is a greeting, not a gate
+  if (document.readyState !== 'loading') {
     hide();
   } else {
-    window.addEventListener('load', hide);
-    setTimeout(hide, 1500); // safety fallback if load never fires
+    document.addEventListener('DOMContentLoaded', hide, { once: true });
   }
 })();
 
@@ -133,26 +133,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* contact form radio pills */
-  document.querySelectorAll('.radio-group').forEach(group => {
-    const opts = group.querySelectorAll('.radio-opt');
-    opts.forEach(opt => {
-      opt.addEventListener('click', () => {
-        opts.forEach(o => o.classList.remove('selected'));
-        opt.classList.add('selected');
-        const input = opt.querySelector('input');
-        if (input) input.checked = true;
-      });
-    });
-  });
+  /* contact form: preselect the inquiry type from ?type= (e.g. from the AX page) */
+  const preset = new URLSearchParams(location.search).get('type');
+  if (preset) {
+    const r = document.querySelector(`.radio-group input[value="${CSS.escape(preset)}"]`);
+    if (r) r.checked = true;
+  }
 
-  /* contact form validation + mailto handoff (no backend is wired up yet —
-     this builds a pre-filled email in the visitor's own mail client rather
-     than silently discarding the submission) */
+  /* contact form: validate, then post to FormSubmit, which emails the
+     entry to info@mediom.biz (FormSubmit sends a one-time activation mail
+     to that address on the first submission) */
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const form = document.querySelector('#contact-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       let valid = true;
       let firstInvalid = null;
@@ -190,24 +184,44 @@ document.addEventListener('DOMContentLoaded', () => {
         '~100': '〜100万円', '100-300': '100〜300万円', '300-500': '300〜500万円',
         '500+': '500万円〜', 'undecided': '未定', '': '未選択',
       };
-      const subject = `【mediomサイトより】${typeLabel} - ${get('company')}様`;
-      const body = [
-        `お問い合わせ種別: ${typeLabel}`,
-        `会社名: ${get('company')}`,
-        `お名前: ${get('name')}`,
-        `メール: ${get('email')}`,
-        `ご予算: ${budgetMap[get('budget')] ?? get('budget')}`,
-        '',
-        'ご相談内容:',
-        get('message'),
-      ].join('\n');
-      const mailto = `mailto:hello@mediom.jp?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const payload = {
+        _subject: `【mediomサイトより】${typeLabel} - ${get('company')}様`,
+        _template: 'table',
+        _captcha: 'false',
+        _replyto: get('email'),
+        _honey: get('_honey'),
+        'お問い合わせ種別': typeLabel,
+        '会社名': get('company'),
+        'お名前': get('name'),
+        'メール': get('email'),
+        'ご予算': budgetMap[get('budget')] ?? get('budget'),
+        'ご相談内容': get('message'),
+      };
 
-      form.hidden = true;
-      const thanks = document.querySelector('#form-thanks');
-      if (thanks) thanks.hidden = false;
-      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-      window.location.href = mailto;
+      const btn = form.querySelector('.btn-submit');
+      const error = document.querySelector('#form-error');
+      const label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = '送信中…';
+      if (error) error.hidden = true;
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/info@mediom.biz', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || String(res.status));
+        form.hidden = true;
+        const thanks = document.querySelector('#form-thanks');
+        if (thanks) thanks.hidden = false;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      } catch (err) {
+        if (error) { error.hidden = false; error.focus(); }
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
     });
   }
 });
