@@ -214,8 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!res.ok || String(data.success) !== 'true') throw new Error(data.message || String(res.status));
         form.hidden = true;
         const thanks = document.querySelector('#form-thanks');
-        if (thanks) thanks.hidden = false;
-        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        if (thanks) {
+          thanks.hidden = false;
+          // bring the confirmation into view (scroll-padding-top keeps it clear of the sticky header)
+          thanks.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+          thanks.focus({ preventScroll: true });
+        }
       } catch (err) {
         if (error) { error.hidden = false; error.focus(); }
       } finally {
