@@ -41,13 +41,41 @@ document.addEventListener('DOMContentLoaded', () => {
   if (hero && !reduce) {
     let queued = false;
     const pin = hero.querySelector('.hero-pin');
+    const cat = hero.querySelector('.hero-cat');
+    let catOn = false;
     const update = () => {
       queued = false;
       const stickTop = parseFloat(getComputedStyle(pin).top) || 0;
       const travel = Math.max(1, hero.offsetHeight - pin.offsetHeight);
       const p = Math.min(1, Math.max(0, (stickTop - hero.getBoundingClientRect().top) / travel));
       hero.style.setProperty('--p', p.toFixed(4));
+      // the cat walks once the mark is complete; scrolling back resets it
+      if (cat) {
+        if (p >= 0.86 && !catOn) {
+          catOn = true;
+          cat.currentTime = 0;
+          cat.classList.add('is-on');
+          cat.play().catch(() => cat.classList.remove('is-on'));
+        } else if (p < 0.6 && catOn) {
+          catOn = false;
+          cat.pause();
+          cat.classList.remove('is-on');
+        }
+      }
     };
+    // stand the cat's feet on the rule above the hero footer (feet sit 93.5% down the video frame)
+    const placeCat = () => {
+      const foot = hero.querySelector('.hero-foot');
+      if (!cat || !foot) return;
+      const fromBottom = pin.getBoundingClientRect().bottom - foot.getBoundingClientRect().top;
+      cat.style.setProperty('--cat-b', (fromBottom - cat.offsetHeight * 0.065) + 'px');
+    };
+    if (cat) {
+      cat.addEventListener('ended', () => cat.classList.remove('is-on'));
+      placeCat();
+      window.addEventListener('resize', placeCat, { passive: true });
+      if (document.fonts) document.fonts.ready.then(placeCat);
+    }
     const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });

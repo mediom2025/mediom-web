@@ -103,7 +103,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
    taller than the screen and its inner panel sticks, so while it is pinned the
    scroll progress (--p, 0→1, set by main.js) slides the flow layer sideways. */
 .hero{--hdr:82px;--p:0;position:relative;height:230svh;background:var(--green);color:var(--paper)}
-.hero-pin{position:sticky;top:var(--hdr);height:calc(100svh - var(--hdr));overflow:clip}
+.hero-pin{position:sticky;top:var(--hdr);height:calc(100svh - var(--hdr));overflow:clip;background:var(--green)}
 .hero .container{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;gap:var(--s4);padding-block:var(--s7) var(--s6)}
 .hero .eyebrow{color:#9fc2b2}
 .hero h1{font-size:clamp(36px,5.6vw,76px);letter-spacing:.04em;line-height:1.35;margin-top:var(--s2);text-shadow:0 2px 24px rgba(10,40,33,.45)}
@@ -123,7 +123,11 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
   translate:calc(34vw - var(--p) * 62vw) 0;will-change:translate}
 .hf-mark path{stroke-dasharray:1 1;stroke-dashoffset:calc(1 - min(1, .14 + var(--p) * 1.35))}
 
-@media(prefers-reduced-motion:reduce){.hero{height:auto}.hero-pin{position:relative;top:0;height:calc(100svh - var(--hdr))}}
+/* the cat video: black drops out under screen blending, leaving the paper-white line */
+.hero-cat{position:absolute;z-index:1;right:0;bottom:var(--cat-b,64px);width:clamp(240px,26vw,380px);aspect-ratio:732/266;height:auto;
+  mix-blend-mode:screen;opacity:0;transition:opacity .5s ease;pointer-events:none}
+.hero-cat.is-on{opacity:.94}
+@media(prefers-reduced-motion:reduce){.hero{height:auto}.hero-pin{position:relative;top:0;height:calc(100svh - var(--hdr))}.hero-cat{display:none}}
 
 /* ---------- sections ---------- */
 .section{padding-block:var(--s9)}
@@ -422,6 +426,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
   .hero{--hdr:77px;height:210svh}
   /* phones: copy sits low, the top of the panel is a lane for the flow */
   .hero .container{justify-content:flex-end;padding-bottom:var(--s5)}
+  .hero-cat{width:50vw}
   .hf-mark{width:88vw;right:2vw;bottom:auto;top:1%;translate:calc(60vw - var(--p) * 70vw) 0}
   .cta-band .btn{width:100%}
   .foot-nav{gap:0 20px}
