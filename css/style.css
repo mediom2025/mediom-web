@@ -99,12 +99,24 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .mobile-nav .cta{border:0;margin-top:14px;text-align:center;font-family:var(--jp);font-size:14px;color:var(--paper);background:var(--green);border-radius:99px}
 
 /* ---------- hero ---------- */
-/* type carries the first screen: a large heading, air, and a quiet footer line */
-.hero .container{display:flex;flex-direction:column;gap:var(--s4);padding-block:clamp(72px,11vh,140px) var(--s7)}
+/* a full-bleed field of the logo green with paper-coloured type */
+.hero{position:relative;overflow:clip;background:var(--green);color:var(--paper)}
+.hero .container{position:relative;z-index:1;min-height:calc(100svh - 82px);display:flex;flex-direction:column;justify-content:center;gap:var(--s4);padding-block:var(--s8) var(--s6)}
+.hero .eyebrow{color:#9fc2b2}
 .hero h1{font-size:clamp(36px,5.6vw,76px);letter-spacing:.04em;line-height:1.35;margin-top:var(--s2)}
-.hero .lead{font-size:16px;color:var(--ink-soft);max-width:34em;margin-top:var(--s3)}
+.hero .lead{font-size:16px;color:rgba(251,250,247,.82);max-width:34em;margin-top:var(--s3)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s5)}
-.hero-foot{display:flex;justify-content:space-between;gap:var(--s2) var(--s5);flex-wrap:wrap;margin-top:clamp(56px,9vh,104px);padding-top:var(--s4);border-top:1px solid var(--line);font-family:var(--en);font-size:12.5px;color:var(--ink-faint)}
+.hero .btn-primary{background:var(--paper);color:var(--green)}
+.hero .btn-primary:hover{background:#fff}
+.hero .btn-ghost{color:var(--paper);border-color:rgba(251,250,247,.55)}
+.hero .btn-ghost:hover{background:rgba(251,250,247,.1)}
+.hero :focus-visible{outline-color:var(--paper)}
+.hero-foot{display:flex;justify-content:space-between;gap:var(--s2) var(--s5);flex-wrap:wrap;margin-top:auto;padding-top:var(--s4);border-top:1px solid rgba(251,250,247,.2);font-family:var(--en);font-size:12.5px;color:rgba(251,250,247,.68)}
+.hero-actions + .hero-foot{margin-top:clamp(48px,9vh,104px)}
+.hero-mark{position:absolute;z-index:0;right:-10vw;bottom:-14%;width:min(78vw,1000px);height:auto;fill:none;stroke:#1b5144;stroke-width:15;stroke-linecap:round}
+.hero-mark path{stroke-dasharray:1 1;stroke-dashoffset:1;animation:markDraw 3.2s cubic-bezier(.65,0,.35,1) .5s forwards}
+@keyframes markDraw{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.hero-mark path{animation:none;stroke-dashoffset:0}}
 
 /* ---------- sections ---------- */
 .section{padding-block:var(--s9)}
@@ -387,6 +399,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
   .nav-toggle{display:flex}
   .wk,.wk.rev,.about-top,.ax-intro,.aid{grid-template-columns:1fr}
   .hero-actions .btn{flex:1 1 auto}
+  .hero-mark{width:150vw;right:-55vw;bottom:-4%}
   .cta-band .btn{width:100%}
   .foot-nav{gap:0 20px}
   .wk{gap:var(--s6)}
