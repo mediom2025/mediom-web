@@ -41,25 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (hero && !reduce) {
     let queued = false;
     const pin = hero.querySelector('.hero-pin');
-    const cat = hero.querySelector('.hero-cat');
-    let catTimer;
     const update = () => {
       queued = false;
       const stickTop = parseFloat(getComputedStyle(pin).top) || 0;
       const travel = Math.max(1, hero.offsetHeight - pin.offsetHeight);
       const p = Math.min(1, Math.max(0, (stickTop - hero.getBoundingClientRect().top) / travel));
       hero.style.setProperty('--p', p.toFixed(4));
-      // the cat walks in once the mark is complete, and leaves if the visitor scrolls back
-      if (cat) {
-        if (p >= 0.66 && !cat.classList.contains('is-on')) {
-          cat.classList.add('is-on');
-          clearTimeout(catTimer);
-          catTimer = setTimeout(() => cat.classList.add('is-playing'), 2400);
-        } else if (p < 0.56 && cat.classList.contains('is-on')) {
-          clearTimeout(catTimer);
-          cat.classList.remove('is-on', 'is-playing');
-        }
-      }
     };
     const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
     window.addEventListener('scroll', onScroll, { passive: true });

@@ -102,7 +102,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 /* a full-bleed field of the logo green with paper-coloured type. The section is
    taller than the screen and its inner panel sticks, so while it is pinned the
    scroll progress (--p, 0→1, set by main.js) slides the flow layer sideways. */
-.hero{--hdr:82px;--p:0;position:relative;height:260svh;background:var(--green);color:var(--paper)}
+.hero{--hdr:82px;--p:0;position:relative;height:230svh;background:var(--green);color:var(--paper)}
 .hero-pin{position:sticky;top:var(--hdr);height:calc(100svh - var(--hdr));overflow:clip}
 .hero .container{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;gap:var(--s4);padding-block:var(--s7) var(--s6)}
 .hero .eyebrow{color:#9fc2b2}
@@ -117,35 +117,13 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .hero-foot{display:flex;justify-content:space-between;gap:var(--s2) var(--s5);flex-wrap:wrap;margin-top:auto;padding-top:var(--s4);border-top:1px solid rgba(251,250,247,.2);font-family:var(--en);font-size:12.5px;color:rgba(251,250,247,.68)}
 .hero-actions + .hero-foot{margin-top:clamp(40px,8vh,96px)}
 
-/* the mark: both feet show from the start, the strokes grow with --p and meet at the leaf tip */
+/* the mark: it travels right to left with --p while its strokes grow from the feet to the leaf tip */
 .hero-flow{position:absolute;inset:0;z-index:1;pointer-events:none}
-.hf-mark{position:absolute;right:-4vw;bottom:-6%;width:min(70vw,980px);height:auto;fill:none;stroke:#1d5446;stroke-width:15;stroke-linecap:round}
+.hf-mark{position:absolute;right:-4vw;bottom:-6%;width:min(70vw,980px);height:auto;fill:none;stroke:#1d5446;stroke-width:15;stroke-linecap:round;
+  translate:calc(34vw - var(--p) * 62vw) 0;will-change:translate}
 .hf-mark path{stroke-dasharray:1 1;stroke-dashoffset:calc(1 - min(1, .14 + var(--p) * 1.35))}
 
-/* the cat: four line-drawn poses (images/cats) painted in paper colour through a mask,
-   all at one scale (--k) and standing on the same ground line */
-.hero-cat{--k:.32;position:absolute;bottom:0;right:calc(min(70vw,980px) * .11 - 4vw + 18px);width:200px;height:170px;
-  opacity:0;translate:45vw 0;transition:opacity .4s ease,translate 0s linear .4s}
-.hero-cat i{position:absolute;bottom:0;left:50%;background:var(--paper);opacity:0;
-  -webkit-mask:var(--src) center bottom/contain no-repeat;mask:var(--src) center bottom/contain no-repeat;
-  width:calc(var(--w) * var(--k));height:calc(var(--h) * var(--k));translate:-50% 0}
-.c-walk{--src:url(/images/cats/cat-walking.png);--w:595px;--h:458px;scale:-1 1}
-.c-up{--src:url(/images/cats/cat-sitting-up.png);--w:317px;--h:505px;scale:-1 1}
-.c-stretch{--src:url(/images/cats/cat-stretching.png);--w:397px;--h:442px}
-.c-sit{--src:url(/images/cats/cat-sitting-down.png);--w:361px;--h:381px;clip-path:inset(0 0 0 9%)} /* the source has a stray stroke at its left edge */
-/* walking in from the right edge */
-.hero-cat.is-on{opacity:1;translate:0 0;transition:opacity .3s ease,translate 2.4s linear}
-.hero-cat.is-on .c-walk{opacity:1;animation:catStep .42s ease-in-out infinite}
-@keyframes catStep{0%,100%{translate:-50% 0}50%{translate:-50% -3px}}
-/* then playing: up on its hind legs to bat at the leaf, a long stretch, a sit and groom */
-.hero-cat.is-playing .c-walk{opacity:0;animation:none}
-.hero-cat.is-playing .c-up{animation:poseUp 9s infinite}
-.hero-cat.is-playing .c-stretch{animation:poseStretch 9s infinite}
-.hero-cat.is-playing .c-sit{animation:poseSit 9s infinite}
-@keyframes poseUp{0%{opacity:1;translate:-50% 0}8%{translate:-50% -8px}14%{translate:-50% 0}20%{translate:-50% -6px}26%{translate:-50% 0}33%{opacity:1}33.1%,100%{opacity:0}}
-@keyframes poseStretch{0%,33%{opacity:0}33.1%,55%{opacity:1}55.1%,100%{opacity:0}}
-@keyframes poseSit{0%,55%{opacity:0}55.1%,100%{opacity:1}}
-@media(prefers-reduced-motion:reduce){.hero{height:auto}.hero-pin{position:relative;top:0;height:calc(100svh - var(--hdr))}.hero-cat{display:none}}
+@media(prefers-reduced-motion:reduce){.hero{height:auto}.hero-pin{position:relative;top:0;height:calc(100svh - var(--hdr))}}
 
 /* ---------- sections ---------- */
 .section{padding-block:var(--s9)}
@@ -441,11 +419,10 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
   .nav-toggle{display:flex}
   .wk,.wk.rev,.about-top,.ax-intro,.aid{grid-template-columns:1fr}
   .hero-actions .btn{flex:1 1 auto}
-  .hero{--hdr:77px;height:230svh}
+  .hero{--hdr:77px;height:210svh}
   /* phones: copy sits low, the top of the panel is a lane for the flow */
   .hero .container{justify-content:flex-end;padding-bottom:var(--s5)}
-  .hf-mark{width:88vw;right:2vw;bottom:auto;top:1%}
-  .hero-cat{--k:.15;width:96px;height:84px;bottom:auto;top:calc(1% + 88vw * .56 - 84px);right:calc(2vw + 88vw * .11 + 4px)}
+  .hf-mark{width:88vw;right:2vw;bottom:auto;top:1%;translate:calc(60vw - var(--p) * 70vw) 0}
   .cta-band .btn{width:100%}
   .foot-nav{gap:0 20px}
   .wk{gap:var(--s6)}
