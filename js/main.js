@@ -42,39 +42,56 @@ document.addEventListener('DOMContentLoaded', () => {
     let queued = false;
     const pin = hero.querySelector('.hero-pin');
     const cat = hero.querySelector('.hero-cat');
-    let catOn = false;
     const update = () => {
       queued = false;
       const stickTop = parseFloat(getComputedStyle(pin).top) || 0;
       const travel = Math.max(1, hero.offsetHeight - pin.offsetHeight);
       const p = Math.min(1, Math.max(0, (stickTop - hero.getBoundingClientRect().top) / travel));
       hero.style.setProperty('--p', p.toFixed(4));
-      // the cat walks once the mark is complete; scrolling back resets it
+      // the cat sets off once the mark has stopped; scrolling back resets it
       if (cat) {
-        if (p >= 0.86 && !catOn) {
-          catOn = true;
-          cat.currentTime = 0;
-          cat.classList.add('is-on');
-          cat.play().catch(() => cat.classList.remove('is-on'));
-        } else if (p < 0.6 && catOn) {
-          catOn = false;
-          cat.pause();
-          cat.classList.remove('is-on');
-        }
+        if (p >= 0.85 && !walk.on) startWalk();
+        else if (p < 0.6 && walk.on) stopWalk(true);
       }
     };
-    // stand the cat's feet on the rule above the hero footer (feet sit 93.5% down the video frame)
-    const placeCat = () => {
-      const foot = hero.querySelector('.hero-foot');
-      if (!cat || !foot) return;
-      const fromBottom = pin.getBoundingClientRect().bottom - foot.getBoundingClientRect().top;
-      cat.style.setProperty('--cat-b', (fromBottom - cat.offsetHeight * 0.065) + 'px');
+    /* the walking cat. The clip is one stride held in place (cat facing right); the cat
+       covers 11.38 px of the 640 px source frame per 24 fps frame, so moving the element at
+       that rate keeps its feet planted. RATE speeds both up together. */
+    const foot = hero.querySelector('.hero-foot');
+    const RATE = 2, SRC_SPEED = 11.382 * 24 / 640;      // source widths per second
+    const TAIL = 0.06, PAW = 0.86, NOSE = 0.94, FEET = 0.958; // fractions of the clip box
+    const walk = { on: false, t0: 0, raf: 0 };
+    const geom = () => {
+      const pr = pin.getBoundingClientRect(), fr = foot.getBoundingClientRect();
+      return { x0: fr.left - pr.left, w: fr.width, y: fr.top - pr.top, cw: cat.offsetWidth, ch: cat.offsetHeight };
     };
-    if (cat) {
-      cat.addEventListener('ended', () => cat.classList.remove('is-on'));
-      placeCat();
-      window.addEventListener('resize', placeCat, { passive: true });
-      if (document.fonts) document.fonts.ready.then(placeCat);
+    const frame = (now) => {
+      const g = geom();
+      const x = (now - walk.t0) / 1000 * SRC_SPEED * RATE * g.cw;
+      const left = g.x0 - TAIL * g.cw + x;
+      const nose = left + NOSE * g.cw, lineEnd = g.x0 + g.w;
+      const fadeIn = Math.min(1, (now - walk.t0) / 500);
+      const fadeOut = 1 - Math.min(1, Math.max(0, (nose - lineEnd) / (0.55 * g.cw)));
+      cat.style.transform = `translate(${left}px, ${g.y - FEET * g.ch}px)`;
+      cat.style.opacity = (fadeIn * fadeOut * 0.95).toFixed(3);
+      foot.style.setProperty('--walk', Math.min(1, Math.max(0, (left + PAW * g.cw - g.x0) / g.w)).toFixed(4));
+      if (fadeOut > 0) walk.raf = requestAnimationFrame(frame);
+      else stopWalk(false);
+    };
+    const startWalk = () => {
+      walk.on = true;
+      cat.currentTime = 0;
+      cat.playbackRate = RATE;
+      cat.play().then(() => {
+        walk.t0 = performance.now();
+        walk.raf = requestAnimationFrame(frame);
+      }).catch(() => {});
+    };
+    function stopWalk(reset) {
+      cancelAnimationFrame(walk.raf);
+      cat.pause();
+      cat.style.opacity = 0;
+      if (reset) { walk.on = false; foot.style.setProperty('--walk', 0); }
     }
     const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
     window.addEventListener('scroll', onScroll, { passive: true });
