@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/css/style.css?v=20261009s">
+<link rel="stylesheet" href="/css/style.css?v=20261009w">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,8 +61,14 @@
 
 <main id="main">
 <section class="hero">
-  <!-- the logo mark, tone on tone; centrelines traced from images/logo-mark.png -->
-  <svg class="hero-mark" viewBox="100 80 214 132" aria-hidden="true"><path pathLength="1" d="M123 200V135.5A40 40 0 0 1 163 95.5C185 95.5 199 108 207 121C216 136 224 150 223 162C223 177 216 192 207 192"/><path pathLength="1" d="M291 200V135.5A40 40 0 0 0 251 95.5C229 95.5 215 108 207 121C198 136 190 150 191 162C191 177 198 192 207 192"/></svg>
+  <!-- pinned while the visitor scrolls; work images and a large line of type drift sideways behind the copy (driven by --p in main.js) -->
+  <div class="hero-pin">
+  <div class="hero-flow" aria-hidden="true">
+    <span class="hf-word">Designing connection moments</span>
+    <img class="hf-img hf-1" src="/images/works/kise-gaiko-pc.jpg" alt="" width="1100" height="664">
+    <img class="hf-img hf-2" src="/images/works/notohibakara-noie.jpg" alt="" width="1000" height="554">
+    <img class="hf-img hf-3" src="/images/works/kise-gaiko-sp.jpg" alt="" width="500" height="1082">
+  </div>
   <div class="container">
     <span class="eyebrow">Designing connection moments</span>
     <h1>つなぐ瞬間を、<br>デザインする。</h1>
@@ -72,6 +78,7 @@
       <a href="/works" class="btn btn-ghost">実績を見る</a>
     </div>
     <div class="hero-foot"><span>Branding / Web / UI・UX / AI Transformation</span><span>Based in Kanazawa, Japan</span></div>
+  </div>
   </div>
 </section>
 
@@ -213,6 +220,6 @@
     </div>
   </div>
 </footer>
-<script src="/js/main.js?v=20261009s" defer></script>
+<script src="/js/main.js?v=20261009w" defer></script>
 </body>
 </html>

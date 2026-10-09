@@ -99,24 +99,36 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .mobile-nav .cta{border:0;margin-top:14px;text-align:center;font-family:var(--jp);font-size:14px;color:var(--paper);background:var(--green);border-radius:99px}
 
 /* ---------- hero ---------- */
-/* a full-bleed field of the logo green with paper-coloured type */
-.hero{position:relative;overflow:clip;background:var(--green);color:var(--paper)}
-.hero .container{position:relative;z-index:1;min-height:calc(100svh - 82px);display:flex;flex-direction:column;justify-content:center;gap:var(--s4);padding-block:var(--s8) var(--s6)}
+/* a full-bleed field of the logo green with paper-coloured type. The section is
+   taller than the screen and its inner panel sticks, so while it is pinned the
+   scroll progress (--p, 0→1, set by main.js) slides the flow layer sideways. */
+.hero{--hdr:82px;--p:0;position:relative;height:220svh;background:var(--green);color:var(--paper)}
+.hero-pin{position:sticky;top:var(--hdr);height:calc(100svh - var(--hdr));overflow:clip}
+.hero .container{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;gap:var(--s4);padding-block:var(--s7) var(--s6)}
 .hero .eyebrow{color:#9fc2b2}
-.hero h1{font-size:clamp(36px,5.6vw,76px);letter-spacing:.04em;line-height:1.35;margin-top:var(--s2)}
-.hero .lead{font-size:16px;color:rgba(251,250,247,.82);max-width:34em;margin-top:var(--s3)}
+.hero h1{font-size:clamp(36px,5.6vw,76px);letter-spacing:.04em;line-height:1.35;margin-top:var(--s2);text-shadow:0 2px 24px rgba(10,40,33,.45)}
+.hero .lead{font-size:16px;color:rgba(251,250,247,.86);max-width:34em;margin-top:var(--s3);text-shadow:0 1px 12px rgba(10,40,33,.6)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s5)}
 .hero .btn-primary{background:var(--paper);color:var(--green)}
 .hero .btn-primary:hover{background:#fff}
-.hero .btn-ghost{color:var(--paper);border-color:rgba(251,250,247,.55)}
-.hero .btn-ghost:hover{background:rgba(251,250,247,.1)}
+.hero .btn-ghost{color:var(--paper);border-color:rgba(251,250,247,.55);background:rgba(17,65,54,.35)}
+.hero .btn-ghost:hover{background:rgba(251,250,247,.12)}
 .hero :focus-visible{outline-color:var(--paper)}
 .hero-foot{display:flex;justify-content:space-between;gap:var(--s2) var(--s5);flex-wrap:wrap;margin-top:auto;padding-top:var(--s4);border-top:1px solid rgba(251,250,247,.2);font-family:var(--en);font-size:12.5px;color:rgba(251,250,247,.68)}
-.hero-actions + .hero-foot{margin-top:clamp(48px,9vh,104px)}
-.hero-mark{position:absolute;z-index:0;right:-10vw;bottom:-14%;width:min(78vw,1000px);height:auto;fill:none;stroke:#1b5144;stroke-width:15;stroke-linecap:round}
-.hero-mark path{stroke-dasharray:1 1;stroke-dashoffset:1;animation:markDraw 3.2s cubic-bezier(.65,0,.35,1) .5s forwards}
-@keyframes markDraw{to{stroke-dashoffset:0}}
-@media(prefers-reduced-motion:reduce){.hero-mark path{animation:none;stroke-dashoffset:0}}
+.hero-actions + .hero-foot{margin-top:clamp(40px,8vh,96px)}
+
+/* the sideways flow: each layer starts at --x0 and travels --dx to the left */
+.hero-flow{position:absolute;inset:0;z-index:1;pointer-events:none}
+/* images sink into the green as they pass behind the copy */
+.hero-flow::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(17,65,54,.92) 0,rgba(17,65,54,.8) 38%,rgba(17,65,54,0) 64%)}
+.hf-word,.hf-img{position:absolute;left:0;will-change:translate}
+.hf-word{top:50%;font-family:var(--en);font-weight:500;font-size:clamp(96px,17vw,260px);line-height:1;letter-spacing:-.01em;white-space:nowrap;color:#1b5144;
+  translate:calc(8vw - var(--p) * 150vw) -50%}
+.hf-img{height:auto;border-radius:6px;box-shadow:0 30px 60px -30px rgba(0,0,0,.55);object-fit:cover;translate:calc(var(--x0) - var(--p) * var(--dx)) 0}
+.hf-1{--x0:67vw;--dx:120vw;top:8%;width:min(34vw,480px);aspect-ratio:1100/664}
+.hf-2{--x0:98vw;--dx:160vw;top:58%;width:min(28vw,400px);aspect-ratio:1000/554}
+.hf-3{--x0:128vw;--dx:190vw;top:22%;width:min(11vw,160px);aspect-ratio:500/1082}
+@media(prefers-reduced-motion:reduce){.hero{height:auto}.hero-pin{position:relative;top:0;height:calc(100svh - var(--hdr))}}
 
 /* ---------- sections ---------- */
 .section{padding-block:var(--s9)}
@@ -412,7 +424,14 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
   .nav-toggle{display:flex}
   .wk,.wk.rev,.about-top,.ax-intro,.aid{grid-template-columns:1fr}
   .hero-actions .btn{flex:1 1 auto}
-  .hero-mark{width:150vw;right:-55vw;bottom:-4%}
+  .hero{--hdr:77px;height:200svh}
+  /* phones: copy sits low, the top of the panel is a lane for the flow */
+  .hero .container{justify-content:flex-end;padding-bottom:var(--s5)}
+  .hero-flow::after{background:linear-gradient(180deg,rgba(17,65,54,0) 0,rgba(17,65,54,0) 30%,rgba(17,65,54,.88) 44%)}
+  .hf-word{top:20%;font-size:120px}
+  .hf-1{--x0:34vw;--dx:170vw;top:3%;width:56vw}
+  .hf-2{--x0:96vw;--dx:210vw;top:16%;width:48vw}
+  .hf-3{--x0:150vw;--dx:250vw;top:4%;width:20vw}
   .cta-band .btn{width:100%}
   .foot-nav{gap:0 20px}
   .wk{gap:var(--s6)}

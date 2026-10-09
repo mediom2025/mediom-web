@@ -36,6 +36,24 @@
 document.addEventListener('DOMContentLoaded', () => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* hero: while the tall section is pinned, publish scroll progress as --p */
+  const hero = document.querySelector('.hero');
+  if (hero && !reduce) {
+    let queued = false;
+    const pin = hero.querySelector('.hero-pin');
+    const update = () => {
+      queued = false;
+      const stickTop = parseFloat(getComputedStyle(pin).top) || 0;
+      const travel = Math.max(1, hero.offsetHeight - pin.offsetHeight);
+      const p = Math.min(1, Math.max(0, (stickTop - hero.getBoundingClientRect().top) / travel));
+      hero.style.setProperty('--p', p.toFixed(4));
+    };
+    const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
   /* scroll reveal: blocks rise in as they enter the viewport; siblings are
      staggered. Skipped entirely when the visitor prefers reduced motion. */
   if (!reduce) {
