@@ -81,7 +81,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
    negative margins crop it so the arches and the word sit on one baseline */
 .logo .logo-mark{height:40px;width:auto;margin:-17px -20px -1px -23px}
 .logo .logo-word{height:22px;width:auto;margin:0 -23px -2px -18px}
-.main-nav{display:flex;align-items:center;gap:6px;font-size:13.5px;letter-spacing:.04em;color:var(--ink-soft)}
+.main-nav{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;letter-spacing:.04em;color:var(--ink)}
 .main-nav a{padding:10px 10px}
 .main-nav a:hover,.main-nav a[aria-current="page"]{color:var(--green)}
 .main-nav .cta{color:var(--paper);background:var(--green);border-radius:99px;padding:9px 20px;margin-left:10px}
@@ -92,7 +92,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .nav-toggle[aria-expanded="true"] i:first-child{transform:translateY(3.25px) rotate(45deg)}
 .nav-toggle[aria-expanded="true"] i:last-child{transform:translateY(-3.25px) rotate(-45deg)}
 .mobile-nav{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--line);
-  display:flex;flex-direction:column;padding:8px 22px 20px;font-size:16px}
+  display:flex;flex-direction:column;padding:8px 22px 20px;font-size:16px;font-weight:500}
 .mobile-nav[hidden]{display:none}
 .mobile-nav a{padding-block:12px;border-bottom:1px solid var(--line)}
 .mobile-nav a[aria-current="page"]{color:var(--green)}
