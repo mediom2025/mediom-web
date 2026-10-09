@@ -125,14 +125,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
   translate:calc(34vw - min(1, var(--p) / .8) * 62vw) 0;will-change:translate}
 .hf-mark path{stroke-dasharray:1 1;stroke-dashoffset:calc(1 - min(1, .14 + var(--p) * 1.35))}
 
-/* the cat: black drops out under screen blending, leaving the paper-white line.
-   main.js sets its position, opacity and how much of the footer rule it has drawn (--walk). */
-.hero-cat{position:absolute;z-index:1;left:0;top:0;width:clamp(112px,10vw,150px);aspect-ratio:480/286;height:auto;
-  mix-blend-mode:screen;opacity:0;pointer-events:none;will-change:transform,opacity}
-.hero-foot{position:relative}
-.hero-foot::after{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:rgba(251,250,247,.8);
-  transform:scaleX(var(--walk,0));transform-origin:left}
-@media(prefers-reduced-motion:reduce){.hero{height:auto}.hero-pin{position:relative;top:0;height:calc(100svh - var(--hdr))}.hero-cat{display:none}}
+@media(prefers-reduced-motion:reduce){.hero{height:auto}.hero-pin{position:relative;top:0;height:calc(100svh - var(--hdr))}}
 
 /* ---------- sections ---------- */
 .section{padding-block:var(--s9)}
@@ -259,7 +252,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .cta-band .btn:hover{background:#fff}
 
 /* ---------- footer ---------- */
-.site-footer .container{padding-block:var(--s8) var(--s6);display:flex;flex-direction:column;gap:var(--s7);font-size:12.5px;color:var(--ink-faint)}
+.site-footer .container{position:relative;padding-block:var(--s8) var(--s6);display:flex;flex-direction:column;gap:var(--s7);font-size:12.5px;color:var(--ink-faint)}
 .foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s5);flex-wrap:wrap}
 .geo{display:flex;flex-direction:column;gap:12px;font-family:var(--en);font-size:12.5px}
 .foot-logo{align-self:flex-start;padding-block:11px;margin-block:-11px}
@@ -268,7 +261,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .foot-nav{display:flex;flex-wrap:wrap;gap:0 24px;font-size:13.5px;color:var(--ink-soft)}
 .foot-nav a{padding:10px 6px;margin-inline:-6px}
 .foot-nav a:hover,.foot-bottom a:hover{color:var(--green)}
-.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);flex-wrap:wrap;padding-top:var(--s4);border-top:1px solid var(--line)}
+.foot-bottom{position:relative;margin-top:var(--s4);display:flex;justify-content:space-between;align-items:center;gap:var(--s3);flex-wrap:wrap;padding-top:var(--s4);border-top:1px solid var(--line)}
 .foot-bottom a{padding-block:10px}
 
 /* ---------- breadcrumbs ---------- */
@@ -396,19 +389,27 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .thanks-box h2{font-size:17px;margin:8px 0}
 .thanks-box p{font-size:15px;color:var(--ink-soft)}
 
-/* ---------- intro loader: logo first, a small cat crosses the line ---------- */
+/* ---------- walking cat (loader + footer) ----------
+   One stride of the line-drawn cat held in place (images/cat-walk-loop-ink.mp4, green on white).
+   Multiply drops the white out; main.js walks it along a rule and sets --walk on that rule. */
+.walk-cat{position:absolute;left:0;top:0;width:104px;aspect-ratio:480/286;height:auto;mix-blend-mode:multiply;
+  opacity:0;pointer-events:none;will-change:transform,opacity}
+.foot-bottom::before,.loader-track::after{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--green);
+  transform:scaleX(var(--walk,0));transform-origin:left}
+.loader-track::after{top:0}
+
+/* ---------- intro loader: logo first, the cat walks the line beneath it ---------- */
 .site-loader{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:var(--paper);transition:opacity .35s ease}
 .loader-logo{display:flex;align-items:flex-end;gap:14px}
 .loader-logo .loader-mark{height:62px;width:auto;margin:-26px -30px -2px -35px}
 .loader-logo .loader-word{height:31px;width:auto;margin:0 -33px -2px -26px}
-.loader-track{position:relative;width:132px;height:1px;background:var(--line)}
-.loader-track .loader-cat{position:absolute;left:0;bottom:1px;width:30px;height:auto;animation:catTrot .4s ease-in-out infinite,catCross 1.2s ease-in-out infinite;transform-origin:50% 100%}
+.loader-track{position:relative;width:150px;height:1px;background:var(--line)}
+.loader-track .loader-cat{width:64px}
 .site-loader.is-hidden{opacity:0;pointer-events:none}
 .site-loader.is-skipped{display:none}
-@keyframes catTrot{0%,100%{translate:0 0}50%{translate:0 -2px}}
-@keyframes catCross{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:calc(100% - 30px);opacity:0}}
 @media(prefers-reduced-motion:reduce){
-  .loader-track .loader-cat,.about-mascot{animation:none!important}
+  .about-mascot{animation:none!important}
+  .walk-cat{display:none}
 }
 
 /* ---------- scroll reveal (classes added by main.js) ---------- */
@@ -432,7 +433,6 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
   .hero{--hdr:77px;height:210svh}
   /* phones: copy sits low, the top of the panel is a lane for the flow */
   .hero .container{justify-content:flex-end;padding-bottom:var(--s5)}
-  .hero-cat{width:28vw}
   .hf-mark{width:88vw;right:2vw;bottom:auto;top:1%;translate:calc(60vw - min(1, var(--p) / .8) * 70vw) 0}
   .cta-band .btn{width:100%}
   .foot-nav{gap:0 20px}

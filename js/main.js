@@ -1,9 +1,53 @@
 // mediom — shared front-end behavior
 
+/* walking cat: the clip is one stride held in place, cat facing right. The cat covers
+   11.38 px of the 640 px source frame per 24 fps frame, so moving the element at that rate
+   (times the playback rate) keeps its feet planted. It walks a rule from the left end,
+   sets --walk on the rule as it goes, and fades once its nose passes the far end. */
+function makeWalker(cat, rule, { rate = 2, onDone } = {}) {
+  const SRC_SPEED = 11.382 * 24 / 640;                    // source widths per second
+  const TAIL = 0.06, PAW = 0.86, NOSE = 0.94, FEET = 0.958; // fractions of the clip box
+  let raf = 0, t0 = 0, on = false;
+  const frame = (now) => {
+    const host = cat.offsetParent.getBoundingClientRect(), r = rule.getBoundingClientRect();
+    const cw = cat.offsetWidth, ch = cat.offsetHeight;
+    const x0 = r.left - host.left, w = r.width;
+    const left = x0 - TAIL * cw + (now - t0) / 1000 * SRC_SPEED * rate * cw;
+    const fadeIn = Math.min(1, (now - t0) / 400);
+    const fadeOut = 1 - Math.min(1, Math.max(0, (left + NOSE * cw - (x0 + w)) / (0.55 * cw)));
+    cat.style.transform = `translate(${left}px, ${r.top - host.top - FEET * ch}px)`;
+    cat.style.opacity = (fadeIn * fadeOut).toFixed(3);
+    rule.style.setProperty('--walk', Math.min(1, Math.max(0, (left + PAW * cw - x0) / w)).toFixed(4));
+    if (fadeOut > 0) { raf = requestAnimationFrame(frame); return; }
+    cat.pause();
+    if (onDone) onDone();
+  };
+  return {
+    start() {
+      if (on) return;
+      on = true;
+      cat.currentTime = 0;
+      cat.playbackRate = rate;
+      cat.play().then(() => {
+        cat.playbackRate = rate;
+        t0 = performance.now();
+        raf = requestAnimationFrame(frame);
+      }).catch(() => { if (onDone) onDone(); });
+    },
+    reset() {
+      cancelAnimationFrame(raf);
+      cat.pause();
+      cat.style.opacity = 0;
+      rule.style.setProperty('--walk', 0);
+      on = false;
+    }
+  };
+}
+
 (() => {
-  /* intro loader — only plays in full on the first page of a visit;
-     later page navigations within the same session skip straight past it
-     so browsing the site doesn't feel like reloading an app each click */
+  /* intro loader — only on the first page of a visit; later navigations within the
+     same session skip it. The cat walks the line under the logo, then the loader lifts.
+     A click skips it, and it never stays longer than 4 s. */
   const loader = document.querySelector('.site-loader');
   if (!loader) return;
   let alreadyVisited = false;
@@ -15,21 +59,27 @@
     loader.classList.add('is-skipped');
     return;
   }
-  const MIN_DISPLAY_MS = 400;
-  const shown = Date.now();
+  let gone = false;
   const hide = () => {
-    const elapsed = Date.now() - shown;
-    const wait = Math.max(0, MIN_DISPLAY_MS - elapsed);
-    setTimeout(() => {
-      loader.classList.add('is-hidden');
-      setTimeout(() => loader.classList.add('is-skipped'), 400);
-    }, wait);
+    if (gone) return;
+    gone = true;
+    loader.classList.add('is-hidden');
+    setTimeout(() => loader.classList.add('is-skipped'), 400);
   };
-  // wait for the DOM, not every image: the loader is a greeting, not a gate
-  if (document.readyState !== 'loading') {
-    hide();
+  loader.addEventListener('click', hide);
+  const cat = loader.querySelector('.walk-cat');
+  const track = loader.querySelector('.loader-track');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (cat && track && !still) {
+    const walker = makeWalker(cat, track, { rate: 3, onDone: () => setTimeout(hide, 150) });
+    if (cat.readyState >= 3) walker.start();
+    else cat.addEventListener('canplay', () => walker.start(), { once: true });
+    setTimeout(hide, 4000);
   } else {
-    document.addEventListener('DOMContentLoaded', hide, { once: true });
+    // no cat: wait for the DOM, not every image — the loader is a greeting, not a gate
+    const later = () => setTimeout(hide, 400);
+    if (document.readyState !== 'loading') later();
+    else document.addEventListener('DOMContentLoaded', later, { once: true });
   }
 })();
 
@@ -41,62 +91,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (hero && !reduce) {
     let queued = false;
     const pin = hero.querySelector('.hero-pin');
-    const cat = hero.querySelector('.hero-cat');
     const update = () => {
       queued = false;
       const stickTop = parseFloat(getComputedStyle(pin).top) || 0;
       const travel = Math.max(1, hero.offsetHeight - pin.offsetHeight);
       const p = Math.min(1, Math.max(0, (stickTop - hero.getBoundingClientRect().top) / travel));
       hero.style.setProperty('--p', p.toFixed(4));
-      // the cat sets off once the mark has stopped; scrolling back resets it
-      if (cat) {
-        if (p >= 0.85 && !walk.on) startWalk();
-        else if (p < 0.6 && walk.on) stopWalk(true);
-      }
     };
-    /* the walking cat. The clip is one stride held in place (cat facing right); the cat
-       covers 11.38 px of the 640 px source frame per 24 fps frame, so moving the element at
-       that rate keeps its feet planted. RATE speeds both up together. */
-    const foot = hero.querySelector('.hero-foot');
-    const RATE = 2, SRC_SPEED = 11.382 * 24 / 640;      // source widths per second
-    const TAIL = 0.06, PAW = 0.86, NOSE = 0.94, FEET = 0.958; // fractions of the clip box
-    const walk = { on: false, t0: 0, raf: 0 };
-    const geom = () => {
-      const pr = pin.getBoundingClientRect(), fr = foot.getBoundingClientRect();
-      return { x0: fr.left - pr.left, w: fr.width, y: fr.top - pr.top, cw: cat.offsetWidth, ch: cat.offsetHeight };
-    };
-    const frame = (now) => {
-      const g = geom();
-      const x = (now - walk.t0) / 1000 * SRC_SPEED * RATE * g.cw;
-      const left = g.x0 - TAIL * g.cw + x;
-      const nose = left + NOSE * g.cw, lineEnd = g.x0 + g.w;
-      const fadeIn = Math.min(1, (now - walk.t0) / 500);
-      const fadeOut = 1 - Math.min(1, Math.max(0, (nose - lineEnd) / (0.55 * g.cw)));
-      cat.style.transform = `translate(${left}px, ${g.y - FEET * g.ch}px)`;
-      cat.style.opacity = (fadeIn * fadeOut * 0.95).toFixed(3);
-      foot.style.setProperty('--walk', Math.min(1, Math.max(0, (left + PAW * g.cw - g.x0) / g.w)).toFixed(4));
-      if (fadeOut > 0) walk.raf = requestAnimationFrame(frame);
-      else stopWalk(false);
-    };
-    const startWalk = () => {
-      walk.on = true;
-      cat.currentTime = 0;
-      cat.playbackRate = RATE;
-      cat.play().then(() => {
-        walk.t0 = performance.now();
-        walk.raf = requestAnimationFrame(frame);
-      }).catch(() => {});
-    };
-    function stopWalk(reset) {
-      cancelAnimationFrame(walk.raf);
-      cat.pause();
-      cat.style.opacity = 0;
-      if (reset) { walk.on = false; foot.style.setProperty('--walk', 0); }
-    }
     const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
     update();
+  }
+
+  /* footer: the cat walks the rule once the footer is in view; it resets when the footer leaves */
+  const footCat = document.querySelector('.foot-cat');
+  const footRule = document.querySelector('.foot-bottom');
+  if (footCat && footRule && !reduce && 'IntersectionObserver' in window) {
+    const walker = makeWalker(footCat, footRule, { rate: 2 });
+    new IntersectionObserver(([e]) => {
+      if (e.intersectionRatio >= 0.6) walker.start();
+      else if (!e.isIntersecting) walker.reset();
+    }, { threshold: [0, 0.6] }).observe(document.querySelector('.site-footer'));
   }
 
   /* scroll reveal: blocks rise in as they enter the viewport; siblings are
