@@ -36,6 +36,41 @@
 document.addEventListener('DOMContentLoaded', () => {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* scroll reveal: blocks rise in as they enter the viewport; siblings are
+     staggered. Skipped entirely when the visitor prefers reduced motion. */
+  if (!reduce) {
+    const SELECTOR = [
+      'main .sechead', '.pillar', '.wk .meta', '.wk .media-col', '.devices .phone',
+      '.about-top > *', '.cols > div', '.about-more', '.nrow',
+      '.cta-band .container > *', '.svc-detail > div', '.steps > div',
+      '.uses > div', '.tl > div', '.ax-intro > *', '.aid', '.info-table tr', '.filters'
+    ].join(',');
+    const targets = [...document.querySelectorAll(SELECTOR)];
+    targets.forEach(el => {
+      const sibs = [...el.parentElement.children].filter(c => targets.includes(c));
+      el.style.setProperty('--d', Math.min(sibs.indexOf(el), 5) * 90 + 'ms');
+      el.setAttribute('data-reveal', el.matches('.devices .phone') ? 'side' : '');
+    });
+    document.documentElement.classList.add('reveal-on');
+    // reveal anything whose top has reached the lower part of the screen,
+    // including blocks a fast scroll or an anchor jump skipped past
+    let pending = targets;
+    let ticking = false;
+    const check = () => {
+      ticking = false;
+      const line = window.innerHeight * 0.9;
+      pending = pending.filter(el => {
+        if (el.getBoundingClientRect().top < line) { el.classList.add('is-in'); return false; }
+        return true;
+      });
+      if (!pending.length) window.removeEventListener('scroll', onScroll);
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(check); } };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    check();
+  }
+
   /* mobile menu: the header button opens a panel under the sticky bar */
   const toggle = document.querySelector('.nav-toggle');
   const mobileNav = document.getElementById('mobile-nav');
