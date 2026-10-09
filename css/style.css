@@ -42,7 +42,7 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 h1,h2,h3,h4{margin:0;font-weight:700;text-wrap:balance}
 /* break Japanese at phrase boundaries where supported */
-h1,h2,h3,.hero-copy .lead,.cta-band .jp,.pillar p{word-break:auto-phrase}
+h1,h2,h3,.hero .lead,.cta-band .jp,.pillar p{word-break:auto-phrase}
 p{margin:0}
 :focus-visible{outline:2px solid var(--green);outline-offset:2px}
 a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ease,opacity .2s ease,transform .2s ease}
@@ -99,35 +99,12 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .mobile-nav .cta{border:0;margin-top:14px;text-align:center;font-family:var(--jp);font-size:14px;color:var(--paper);background:var(--green);border-radius:99px}
 
 /* ---------- hero ---------- */
-/* the stipple arches sit behind; the copy rises over their faded lower edge */
-.hero{--art-w:clamp(280px,calc((100svh - 380px) * 1.62),640px);overflow:clip}
-.hero .container{display:grid;grid-template-columns:1fr;padding-block:var(--s4) var(--s9)}
-.hero-copy{position:relative;z-index:1;display:flex;flex-direction:column;gap:var(--s4);min-width:0;margin-top:calc(min(var(--art-w),100%) * -.07)}
-.hero-copy h1,.hero-copy .eyebrow{text-shadow:0 0 14px var(--paper),0 0 4px var(--paper)}
-.hero-copy h1{font-size:clamp(28px,4vw,38px);letter-spacing:.06em;line-height:1.5;margin-bottom:var(--s1)}
-.hero-copy .lead{font-size:15.5px;color:var(--ink-soft);max-width:30em}
-.hero-actions{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s4)}
-.hero-art{position:relative;aspect-ratio:214/132;width:100%;max-width:var(--art-w);justify-self:center;min-width:0;order:-1}
-.hero-art svg{display:block;width:100%;height:100%;overflow:visible}
-/* a pale band at the logo's weight, then two fine strokes start at the feet and
-   meet at the leaf tip; a small gold light runs along them afterwards */
-.hm-body{stroke:var(--green-wash);stroke-width:15;stroke-linecap:round;opacity:0;animation:hmFade 1.2s ease .3s forwards}
-.hm-line{stroke:var(--green);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:1;animation:hmDraw 2.6s cubic-bezier(.65,0,.35,1) .6s forwards}
-.hm-glint{stroke:var(--leaf);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:.04 1.2;stroke-dashoffset:.04;opacity:0;animation:hmGlint 7s ease-in-out 3.6s infinite}
-@keyframes hmFade{to{opacity:1}}
-@keyframes hmDraw{to{stroke-dashoffset:0}}
-@keyframes hmGlint{0%{stroke-dashoffset:.04;opacity:0}8%{opacity:1}55%{stroke-dashoffset:-1;opacity:1}62%,100%{stroke-dashoffset:-1;opacity:0}}
-@media(prefers-reduced-motion:reduce){.hm-line{animation:none;stroke-dashoffset:0}.hm-body{animation:none;opacity:1}.hm-glint{display:none}}
-/* wide screens: copy on the left, arches on the right; the left arch's
-   foot reaches back under the heading so the two still overlap a little */
-@media(min-width:960px){
-  .hero .container{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;padding-block:var(--s7) var(--s8)}
-  .hero-copy{grid-column:1;grid-row:1;margin-top:0}
-  .hero-copy h1{font-size:clamp(34px,3.3vw,46px)}
-  .hero-copy .lead{max-width:20em}
-  /* fills its column and bleeds a little past the right edge */
-  .hero-art{grid-column:2;grid-row:1;order:0;justify-self:end;width:calc(100% + min(6vw,96px));max-width:none;margin-right:calc(min(6vw,96px) * -1)}
-}
+/* type carries the first screen: a large heading, air, and a quiet footer line */
+.hero .container{display:flex;flex-direction:column;gap:var(--s4);padding-block:clamp(72px,11vh,140px) var(--s7)}
+.hero h1{font-size:clamp(36px,5.6vw,76px);letter-spacing:.04em;line-height:1.35;margin-top:var(--s2)}
+.hero .lead{font-size:16px;color:var(--ink-soft);max-width:34em;margin-top:var(--s3)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s5)}
+.hero-foot{display:flex;justify-content:space-between;gap:var(--s2) var(--s5);flex-wrap:wrap;margin-top:clamp(56px,9vh,104px);padding-top:var(--s4);border-top:1px solid var(--line);font-family:var(--en);font-size:12.5px;color:var(--ink-faint)}
 
 /* ---------- sections ---------- */
 .section{padding-block:var(--s9)}
@@ -408,9 +385,8 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 @media(max-width:780px){
   .main-nav{display:none}
   .nav-toggle{display:flex}
-  .hero .container,.wk,.wk.rev,.about-top,.ax-intro,.aid{grid-template-columns:1fr}
+  .wk,.wk.rev,.about-top,.ax-intro,.aid{grid-template-columns:1fr}
   .hero-actions .btn{flex:1 1 auto}
-  .hero-copy{margin-top:calc(min(var(--art-w),100%) * -.06)}
   .cta-band .btn{width:100%}
   .foot-nav{gap:0 20px}
   .wk{gap:var(--s6)}
