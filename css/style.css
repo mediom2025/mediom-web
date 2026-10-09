@@ -124,7 +124,10 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .hf-mark path{stroke-dasharray:1 1;stroke-dashoffset:calc(1 - min(1, .14 + var(--p) * 1.35))}
 
 /* the cat video: black drops out under screen blending, leaving the paper-white line */
-.hero-cat{position:absolute;z-index:1;right:0;bottom:var(--cat-b,64px);width:clamp(240px,26vw,380px);aspect-ratio:732/266;height:auto;
+.hero-cat{position:absolute;z-index:1;left:max(var(--gutter),calc((100% - var(--max)) / 2 + var(--gutter)));bottom:var(--cat-b,64px);
+  width:clamp(190px,18vw,260px);aspect-ratio:732/266;height:auto;
+  /* it starts at the left end of the rule and fades as it nears the clip's right edge */
+  -webkit-mask-image:linear-gradient(90deg,#000 72%,transparent 98%);mask-image:linear-gradient(90deg,#000 72%,transparent 98%);
   mix-blend-mode:screen;opacity:0;transition:opacity .5s ease;pointer-events:none}
 .hero-cat.is-on{opacity:.94}
 @media(prefers-reduced-motion:reduce){.hero{height:auto}.hero-pin{position:relative;top:0;height:calc(100svh - var(--hdr))}.hero-cat{display:none}}
@@ -426,7 +429,7 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
   .hero{--hdr:77px;height:210svh}
   /* phones: copy sits low, the top of the panel is a lane for the flow */
   .hero .container{justify-content:flex-end;padding-bottom:var(--s5)}
-  .hero-cat{width:50vw}
+  .hero-cat{width:42vw}
   .hf-mark{width:88vw;right:2vw;bottom:auto;top:1%;translate:calc(60vw - var(--p) * 70vw) 0}
   .cta-band .btn{width:100%}
   .foot-nav{gap:0 20px}
