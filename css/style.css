@@ -109,6 +109,15 @@ a,button{transition:color .2s ease,background-color .2s ease,border-color .2s ea
 .hero-actions{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s4)}
 .hero-art{position:relative;aspect-ratio:5/4;width:100%;max-width:var(--art-w);justify-self:center;translate:12% 0;min-width:0;order:-1}
 .hero-art canvas{display:block;width:100%!important;height:100%!important}
+/* wide screens: copy on the left, arches on the right; the left arch's
+   foot reaches back under the heading so the two still overlap a little */
+@media(min-width:960px){
+  .hero .container{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;padding-block:var(--s7) var(--s8)}
+  .hero-copy{grid-column:1;grid-row:1;margin-top:0}
+  .hero-copy h1{font-size:clamp(34px,3.3vw,46px)}
+  .hero-copy .lead{max-width:20em}
+  .hero-art{grid-column:2;grid-row:1;order:0;translate:none;justify-self:start;width:min(620px,44vw);max-width:none;margin-left:-5vw}
+}
 
 /* ---------- sections ---------- */
 .section{padding-block:var(--s9)}
